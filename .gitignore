@@ -1,0 +1,9 @@
+*.dll
+*.dylib
+*.pdb
+*.so
+/.gradle/
+/.nb-gradle/
+/JmePowerAssets/build/
+/LemurPower/build/
+/LemurPower/src/main/resources/Textures/JmePower/
