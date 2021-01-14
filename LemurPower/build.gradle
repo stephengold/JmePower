@@ -1,0 +1,72 @@
+// Note: "common.gradle" in the root project contains additional initialization
+//   for this project. This initialization is applied in the "build.gradle"
+//   of the root project.
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+description = 'the LemurPower library for jMonkeyEngine'
+ext {
+    artifact = 'LemurPower'
+    metadata = jmeTarget
+
+    if (metadata.equals('')) {
+        version = jmePowerVersion
+    } else {
+        version = "${jmePowerVersion}+${metadata}"
+    }
+    baseName = "${artifact}-${version}" // for POM and class JAR
+
+    if (jmeTarget.equals('')) {
+        srcVersion = jmePowerVersion
+    } else {
+        srcVersion = "${jmePowerVersion}+${jmeTarget}"
+    }
+    srcBaseName = "${artifact}-${srcVersion}" // for javadoc JAR and sources JAR
+
+    resourcesDir = 'src/main/resources/'
+}
+
+jar { archiveBaseName = project.ext.baseName }
+javadocJar { archiveBaseName = project.ext.srcBaseName }
+sourcesJar { archiveBaseName = project.ext.srcBaseName }
+
+dependencies {
+    api 'com.simsilica:lemur:1.14.0'
+    api 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion
+}
+
+processResources.dependsOn(':JmePowerAssets:poweredBy')
+
+build.dependsOn('pom')
+task('pom', type: Copy) {
+    dependsOn 'generatePomFileForMavenPublication'
+    from "${buildDir}/publications/maven/pom-default.xml"
+    into "${buildDir}/libs"
+    rename '.*', baseName + '.pom'
+}
+
+publishToMavenLocal.doLast {
+    println 'published to ' + baseName
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId artifact
+            from components.java
+            pom {
+                licenses {
+                    license {
+                        distribution = 'repo'
+                        name = 'New BSD (3-clause) License'
+                        url = 'https://opensource.org/licenses/BSD-3-Clause'
+                    }
+                }
+            }
+            version project.ext.version
+        }
+    }
+}

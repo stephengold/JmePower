@@ -1,0 +1,75 @@
+// Gradle settings and tasks common to all subprojects
+
+apply plugin: 'java'
+
+group = 'com.github.stephengold'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) { // compile-time options:
+        options.compilerArgs << '-Xdiags:verbose'
+        options.compilerArgs << '-Xlint:unchecked'
+        //options.deprecation = true
+        options.encoding = 'UTF-8'
+    }
+    tasks.withType(JavaExec) { // runtime options:
+        classpath sourceSets.main.runtimeClasspath
+        //doFirst { println commandLine }
+        enableAssertions true
+        //jvmArgs '-verbose:gc'
+        //jvmArgs '-Xms1024m', '-Xmx1024m'
+        //jvmArgs '-XX:+UseConcMarkSweepGC'
+        //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
+    }
+}
+
+ext {
+    jmeTarget = ''
+
+    // current releases of various libraries
+    jmonkeyengineVersion = '3.3.2-stable'
+    jmePowerVersion = '0.1-SNAPSHOT'
+}
+
+repositories {
+    //mavenLocal()
+    jcenter()
+}
+
+// custom tasks for creating source/javadoc JARs
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    dependsOn 'classes'
+    description 'Create a JAR of source files.'
+    from sourceSets.main.allJava
+}
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    dependsOn 'javadoc'
+    description 'Create a JAR of javadoc.'
+    from javadoc.destinationDir
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives jar, sourcesJar, javadocJar
+}
+
+// cleanup tasks
+
+clean.dependsOn('cleanDLLs', 'cleanDyLibs', 'cleanLogs', 'cleanSOs')
+
+task cleanDLLs(type: Delete) { // Windows native libraries
+    delete fileTree(dir: '.', include: '*.dll')
+}
+task cleanDyLibs(type: Delete) { // MacOSX native libraries
+    delete fileTree(dir: '.', include: '*.dylib')
+}
+task cleanLogs(type: Delete) { // JVM crash logs
+    delete fileTree(dir: '.', include: 'hs_err_pid*.log')
+}
+task cleanSOs(type: Delete) { // Linux and Android native libraries
+    delete fileTree(dir: '.', include: '*.so')
+}

@@ -1,0 +1,34 @@
+// Note: "common.gradle" in the root project contains additional initialization
+//   for this project. This initialization is applied in the "build.gradle"
+//   of the root project.
+
+description = 'Generate assets used in LemurPower.'
+ext {
+    // output directories
+    assets = '../LemurPower/src/main/resources/'
+
+    // generated texture files
+    poweredByTex = assets + 'Textures/JmePower/powered-by.jpeg'
+}
+
+dependencies {
+    implementation 'com.github.stephengold:Heart:6.2.0'
+    implementation 'org.imgscalr:imgscalr-lib:4.2'
+}
+
+task textures {
+    dependsOn 'poweredBy'
+    description 'Generate texture assets used in LemurPower.'
+}
+task poweredBy(type: JavaExec) {
+    main 'com.github.stephengold.jmepower.assets.MakePoweredBy'
+    outputs.files([poweredByTex])
+}
+
+// cleanup tasks
+clean.dependsOn('cleanTextures')
+
+task cleanTextures(type: Delete) {
+    delete(poweredByTex)
+    description 'Delete generated texture assets.'
+}
