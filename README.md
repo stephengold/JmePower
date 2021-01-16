@@ -25,15 +25,15 @@ The source code has [a BSD 3-Clause license][license].
      + `cd JmePower`
      + `git checkout -b latest 0.1.0`
    + using a web browser:
-     + browse to [https://github.com/stephengold/JmePower/releases/latest][latest]
+     + browse to https://github.com/stephengold/JmePower/releases/latest
      + follow the "Source code (zip)" link
      + save the ZIP file
-     + unzip the saved ZIP file
+     + extract the contents of the saved ZIP file
      + `cd` to the extracted directory/folder
  3. Set the `JAVA_HOME` environment variable:
    + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
    + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
- 4. Run the Gradle wrapper:
+ 4. Run the [Gradle] wrapper:
    + using Bash:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
 
@@ -90,7 +90,7 @@ attached explicitly in `simpleInitApp()`:
     LemurLoadingState loading = new LemurLoadingState(preloadArray);
     stateManager.attach(loading);
 
-or it might be passed the application's constructor:
+or it might be passed to the application's constructor:
 
     private MyApplication() {
         super(
