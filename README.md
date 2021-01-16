@@ -62,7 +62,7 @@ and also on [the Lemur toolkit][lemur].
 
 For projects built using Maven or Gradle, the build tools should automatically
 resolve the compile-time dependencies.
-However, the Lemur toolkit requires [Groovy] support at runtime,
+However, the Lemur toolkit requires [Groovy][] support at runtime,
 so you may also need to add a Groovy library
 (such as groovy-jsr223 or groovy-all) to the runtime classpath.
 
