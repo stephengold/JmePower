@@ -13,16 +13,16 @@ ext {
     metadata = jmeTarget
 
     if (metadata.equals('')) {
-        version = jmePowerVersion
+        version = lemurPowerVersion
     } else {
-        version = "${jmePowerVersion}+${metadata}"
+        version = "${lemurPowerVersion}+${metadata}"
     }
     baseName = "${artifact}-${version}" // for POM and class JAR
 
     if (jmeTarget.equals('')) {
-        srcVersion = jmePowerVersion
+        srcVersion = lemurPowerVersion
     } else {
-        srcVersion = "${jmePowerVersion}+${jmeTarget}"
+        srcVersion = "${lemurPowerVersion}+${jmeTarget}"
     }
     srcBaseName = "${artifact}-${srcVersion}" // for javadoc JAR and sources JAR
 
