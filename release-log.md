@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 0.2.0 released on TBD
+## Version 0.2.0 released on 27 January 2021
 
 + Pass the `AssetManager` to `load()` methods. (API change)
 + Split off `JmeLoadingState` from the `LemurLoadingState` class.

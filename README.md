@@ -23,7 +23,7 @@ The source code has [a BSD 3-Clause license][license].
    + using Git:
      + `git clone https://github.com/stephengold/JmePower.git
      + `cd JmePower`
-     + `git checkout -b latest 0.1.0`
+     + `git checkout -b latest 0.2.0`
    + using a web browser:
      + browse to https://github.com/stephengold/JmePower/releases/latest
      + follow the "Source code (zip)" link
@@ -74,7 +74,7 @@ Add to the project’s "build.gradle" file:
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:LemurPower:0.1.0'
+        compile 'com.github.stephengold:LemurPower:0.2.0'
         runtime 'org.codehaus.groovy:groovy-jsr223:3.0.7'
     }
 
