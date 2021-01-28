@@ -26,8 +26,10 @@
  */
 package com.github.stephengold.jmepower;
 
+import com.jme3.asset.AssetManager;
+
 /**
- * An object that contains loadable assets.
+ * A JMonkeyEngine object that contains loadable assets.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -37,6 +39,8 @@ public interface Loadable {
 
     /**
      * Load the assets of this Loadable without attaching them to any scene.
+     *
+     * @param assetManager the AssetManager for loading (not null)
      */
-    void load();
+    void load(AssetManager assetManager);
 }

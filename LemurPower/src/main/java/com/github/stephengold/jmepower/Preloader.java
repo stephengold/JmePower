@@ -26,6 +26,7 @@
  */
 package com.github.stephengold.jmepower;
 
+import com.jme3.asset.AssetManager;
 import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
@@ -48,6 +49,10 @@ public class Preloader extends Thread {
     // fields
 
     /**
+     * for loading assets
+     */
+    final private AssetManager assetManager;
+    /**
      * notify the creator when done
      */
     final private CountDownLatch completionLatch;
@@ -61,12 +66,16 @@ public class Preloader extends Thread {
     /**
      * Instantiate a Thread to load loadables from the specified Queue.
      *
-     * @param loadables the things to load (not null)
-     * @param completionLatch to notify the creator when done
+     * @param loadables the things to load (not null, alias created)
+     * @param assetManager the AssetManager for loading assets (not null, alias
+     * created)
+     * @param completionLatch to notify the creator when done (not null, alias
+     * created)
      */
-    public Preloader(Queue<Loadable> loadables,
+    public Preloader(Queue<Loadable> loadables, AssetManager assetManager,
             CountDownLatch completionLatch) {
         this.loadables = loadables;
+        this.assetManager = assetManager;
         this.completionLatch = completionLatch;
     }
     // *************************************************************************
@@ -82,7 +91,7 @@ public class Preloader extends Thread {
             }
 
 //            long startMillis = System.currentTimeMillis();
-            loadable.load();
+            loadable.load(assetManager);
 
 //            String name = loadable.getClass().getSimpleName();
 //            long latencyMillis = System.currentTimeMillis() - startMillis;

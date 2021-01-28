@@ -496,8 +496,9 @@ public class LemurLoadingState extends BaseAppState {
         /*
          * Start preload threads to warm up the AssetCache.
          */
+        AssetManager assetManager = application.getAssetManager();
         for (int threadIndex = 0; threadIndex < numPreloaders; ++threadIndex) {
-            Thread thread = new Preloader(queue, latch);
+            Thread thread = new Preloader(queue, assetManager, latch);
             thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
         }
