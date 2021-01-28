@@ -4,6 +4,7 @@ Based on "Jaime":
 * downloaded from:   https://github.com/jMonkeyEngine/jmonkeyengine/tree/master/jme3-testdata/src/main/resources/Models/Jaime
 * author:            Rémy Bouquet
 * author URL:        https://hub.jmonkeyengine.org/u/nehon/summary
+* copyright:         Copyright (c) 2009-2020 jMonkeyEngine
 * license type:      BSD 3-Clause
 * license URL:       https://opensource.org/licenses/BSD-3-Clause
 
