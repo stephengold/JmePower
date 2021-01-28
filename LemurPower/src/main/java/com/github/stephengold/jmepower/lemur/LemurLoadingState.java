@@ -26,47 +26,11 @@
  */
 package com.github.stephengold.jmepower.lemur;
 
+import com.github.stephengold.jmepower.JmeLoadingState;
 import com.github.stephengold.jmepower.Loadable;
-import com.github.stephengold.jmepower.Preloader;
-import com.jme3.animation.AnimControl;
-import com.jme3.animation.Animation;
-import com.jme3.animation.AnimationFactory;
-import com.jme3.animation.LoopMode;
 import com.jme3.app.Application;
-import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.BaseAppState;
-import com.jme3.asset.AssetManager;
-import com.jme3.cinematic.Cinematic;
-import com.jme3.cinematic.PlayState;
-import com.jme3.cinematic.events.AnimationEvent;
-import com.jme3.cinematic.events.CinematicEvent;
-import com.jme3.cinematic.events.CinematicEventListener;
-import com.jme3.input.InputManager;
-import com.jme3.input.KeyInput;
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.KeyTrigger;
-import com.jme3.light.PointLight;
-import com.jme3.light.SpotLight;
-import com.jme3.material.Material;
-import com.jme3.material.Materials;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
-import com.jme3.math.Vector3f;
-import com.jme3.renderer.Camera;
-import com.jme3.renderer.queue.RenderQueue;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
-import com.jme3.scene.Node;
-import com.jme3.scene.shape.Quad;
-import com.jme3.shadow.EdgeFilteringMode;
-import com.jme3.shadow.SpotLightShadowRenderer;
-import com.jme3.texture.Texture;
 import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.style.BaseStyles;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 
@@ -75,89 +39,15 @@ import java.util.logging.Logger;
  * initializing Lemur. When its work is done, it disables (but does not detach)
  * itself.
  */
-public class LemurLoadingState extends BaseAppState {
+public class LemurLoadingState extends JmeLoadingState {
     // *************************************************************************
     // constants and loggers
 
     /**
      * message logger for this class
      */
-    final public static Logger logger
+    final public static Logger logger2
             = Logger.getLogger(LemurLoadingState.class.getName());
-    /**
-     * name of the input mapping to cancel the Cinematic
-     */
-    final private static String cancelAction = "cancel cinematic";
-    /**
-     * name of the input mapping to pause the Cinematic
-     */
-    final private static String pauseAction = "toggle pause";
-    // *************************************************************************
-    // fields
-
-    /**
-     * listen for the Tab key
-     */
-    final private ActionListener cancelListener = new ActionListener() {
-        @Override
-        public void onAction(String name, boolean keyPressed, float tpf) {
-            if (cinematic != null) {
-                cinematic.stop();
-            }
-        }
-    };
-    /**
-     * listen for the Pause key
-     */
-    final private ActionListener pauseListener = new ActionListener() {
-        @Override
-        public void onAction(String name, boolean keyPressed, float tpf) {
-            if (keyPressed && cinematic != null) {
-                PlayState playState = cinematic.getPlayState();
-                if (playState == PlayState.Playing) {
-                    cinematic.pause();
-                } else if (playState == PlayState.Paused) {
-                    cinematic.play();
-                }
-            }
-        }
-    };
-    /**
-     * entertain the user
-     */
-    private Cinematic cinematic;
-    /**
-     * monitor how many locally-created threads are running
-     */
-    private CountDownLatch latch;
-    /**
-     * hide what happens in the main scene
-     */
-    private Geometry shutter;
-    /**
-     * count update()s for scheduling
-     */
-    private int updateCount = 0;
-    /**
-     * assets to be preloaded
-     */
-    final private Queue<Loadable> queue;
-    /**
-     * secondary lighting for the Cinematic
-     */
-    private PointLight pointLight;
-    /**
-     * access the AssetManager, InputManager, and scene graphs
-     */
-    private SimpleApplication application;
-    /**
-     * primary lighting for the Cinematic
-     */
-    private SpotLight spotlight;
-    /**
-     * shadows for the Cinematic
-     */
-    private SpotLightShadowRenderer shadowRenderer;
     // *************************************************************************
     // constructors
 
@@ -167,123 +57,32 @@ public class LemurLoadingState extends BaseAppState {
      * @param loadables the assets to preload (not null)
      */
     public LemurLoadingState(Loadable... loadables) {
-        int numLoadables = loadables.length;
-        queue = new ArrayBlockingQueue<>(numLoadables);
-        List<Loadable> list = Arrays.asList(loadables);
-        queue.addAll(list);
+        super(loadables);
     }
     // *************************************************************************
-    // BaseAppState methods
+    // JmeLoadingState methods
 
     /**
-     * Callback invoked after this AppState is detached or during application
-     * shutdown if the state is still attached. onDisable() is called before
-     * this cleanup() method if the state is enabled at the time of cleanup.
+     * Create and start the background threads.
      *
-     * @param application the application instance (not null)
+     * @param numAdditionalThreads (&ge;0)
      */
     @Override
-    protected void cleanup(Application application) {
-        // do nothing
-    }
-
-    /**
-     * Callback invoked after this AppState is attached but before onEnable().
-     *
-     * @param application the application instance (not null)
-     */
-    @Override
-    protected void initialize(Application application) {
-        this.application = (SimpleApplication) application;
-    }
-
-    /**
-     * Callback invoked whenever this AppState ceases to be both attached and
-     * enabled.
-     */
-    @Override
-    protected void onDisable() {
-        if (shutter != null) {
-            shutter.removeFromParent();
-            shutter = null;
-        }
-
-        InputManager inputManager = application.getInputManager();
-        inputManager.deleteMapping(cancelAction);
-        inputManager.removeListener(cancelListener);
-
-        inputManager.deleteMapping(pauseAction);
-        inputManager.removeListener(pauseListener);
-    }
-
-    /**
-     * Callback invoked whenever this AppState becomes both attached and
-     * enabled.
-     */
-    @Override
-    protected void onEnable() {
-        InputManager inputManager = application.getInputManager();
-        inputManager.addListener(cancelListener, cancelAction);
-        KeyTrigger trigger = new KeyTrigger(KeyInput.KEY_TAB);
-        inputManager.addMapping(cancelAction, trigger);
-
-        inputManager.addListener(pauseListener, pauseAction);
-        trigger = new KeyTrigger(KeyInput.KEY_PAUSE);
-        inputManager.addMapping(pauseAction, trigger);
-    }
-
-    /**
-     * Callback to update this AppState, invoked once per frame when the
-     * AppState is both attached and enabled.
-     *
-     * @param tpf the time interval between frames (in seconds, &ge;0)
-     */
-    @Override
-    public void update(float tpf) {
-        ++updateCount;
-        switch (updateCount) {
-            case 1:
-                setupStage();
-                return;
-            case 2:
-                startThreads();
-                break;
-            case 3:
-                startCinematic();
-                break;
-
-            default: // 4 or more
-                PlayState playState = cinematic.getPlayState();
-                if (playState == PlayState.Paused
-                        || playState == PlayState.Playing) {
-                    return;
-                }
-        }
+    protected void startThreads(int numAdditionalThreads) {
+        super.startThreads(numAdditionalThreads + 1);
         /*
-         * The Cinematic completed or was cancelled by the user.
+         * Start an additional thread to initialize Lemur.
          */
-        long latchCount = latch.getCount();
-        if (latchCount < 1L) {
-            /*
-             * Lemur has been initialized, and all asynchronous asset loads
-             * have completed.
-             */
-            setupShutter();
-
-            Node rootNode = application.getRootNode();
-            rootNode.detachAllChildren();
-            if (pointLight != null) {
-                rootNode.removeLight(pointLight);
+        final CountDownLatch latch = getLatch();
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                initializeLemur();
+                latch.countDown();
             }
-            if (spotlight != null) {
-                rootNode.removeLight(spotlight);
-            }
-            if (shadowRenderer != null) {
-                application.getViewPort().removeProcessor(shadowRenderer);
-            }
-            getStateManager().detach(cinematic);
-            setEnabled(false);
-        }
+        };
+        thread.setPriority(Thread.MIN_PRIORITY);
+        thread.start();
     }
     // *************************************************************************
     // private methods
@@ -294,6 +93,7 @@ public class LemurLoadingState extends BaseAppState {
     private void initializeLemur() {
 //        long startMillis = System.currentTimeMillis();
 
+        Application application = getApplication();
         GuiGlobals.initialize(application);
         BaseStyles.loadGlassStyle();
         GuiGlobals.getInstance().getStyles().setDefaultStyle("glass");
@@ -301,218 +101,5 @@ public class LemurLoadingState extends BaseAppState {
 //        long latencyMillis = System.currentTimeMillis() - startMillis;
 //        float seconds = latencyMillis / 1_000f;
 //        System.out.println("initialized Lemur in " + seconds + " seconds");
-    }
-
-    /**
-     * Load the Jaime model with an extra animation.
-     */
-    private Node loadJaime() {
-        AssetManager assetManager = application.getAssetManager();
-        Node result = (Node) assetManager.loadModel("/Models/Jaime/Jaime.j3o");
-        result.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
-        /*
-         * Add an 0.7-second Animation to translate Jaime forward in a jump.
-         */
-        AnimationFactory af = new AnimationFactory(0.7f, "JumpForward");
-        af.addTimeTranslation(0f, new Vector3f(0f, 0f, -3f));
-        af.addTimeTranslation(0.35f, new Vector3f(0f, 1f, -1.5f));
-        af.addTimeTranslation(0.7f, Vector3f.ZERO);
-        Animation spatialAnimation = af.buildAnimation();
-        AnimControl animControl = result.getControl(AnimControl.class);
-        animControl.addAnim(spatialAnimation);
-        /*
-         * Add an 0.7-second Animation to translate Jaime upward in a jump.
-         */
-        af = new AnimationFactory(0.7f, "JumpUpward");
-        af.addTimeTranslation(0.0f, Vector3f.ZERO);
-        af.addTimeTranslation(0.7f, new Vector3f(0f, 3f, 0f));
-        spatialAnimation = af.buildAnimation();
-        animControl.addAnim(spatialAnimation);
-
-        return result;
-    }
-
-    /**
-     * Set up the Cinematic.
-     *
-     * @param jaime the root of the monkey's C-G model (not null)
-     */
-    private void setupCinematic(final Node jaime) {
-        Node rootNode = application.getRootNode();
-        float duration = 60f; // seconds
-        cinematic = new Cinematic(rootNode, duration);
-
-        cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "Idle", 0.5f, LoopMode.DontLoop));
-        float jumpStart = cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "JumpStart")
-        );
-        cinematic.addCinematicEvent(jumpStart + 0.2f,
-                new AnimationEvent(jaime, "JumpForward", 1)
-        );
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "JumpEnd"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "Taunt"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "Punches"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "SideKick"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "SideKick"));
-        cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "Idle", 1f, LoopMode.DontLoop));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "Wave"));
-        float jumpStart2 = cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "JumpStart")
-        );
-        cinematic.addCinematicEvent(jumpStart2 + 0.2f,
-                new AnimationEvent(jaime, "JumpUpward", 1)
-        );
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "JumpEnd"));
-        cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "Idle", 0.2f, LoopMode.DontLoop));
-
-        cinematic.addListener(new CinematicEventListener() {
-            @Override
-            public void onPlay(CinematicEvent c) {
-                // do nothing
-            }
-
-            @Override
-            public void onPause(CinematicEvent c) {
-                // do nothing
-            }
-
-            @Override
-            public void onStop(CinematicEvent c) {
-                jaime.removeFromParent();
-            }
-        });
-        cinematic.fitDuration();
-        cinematic.setSpeed(1.2f);
-    }
-
-    private Geometry setupFloor() {
-        AssetManager assetManager = application.getAssetManager();
-
-        String assetPath = "/Textures/JmePower/powered-by.jpeg";
-        Texture tex = assetManager.loadTexture(assetPath);
-        Material material = new Material(assetManager, Materials.LIGHTING);
-        material.setTexture("DiffuseMap", tex);
-
-        Quad mesh = new Quad(2.2f, 2.2f);
-        Geometry result = new Geometry("floor", mesh);
-        result.rotate(-FastMath.HALF_PI, 0f, 0f);
-        result.center();
-        result.setMaterial(material);
-        result.setShadowMode(RenderQueue.ShadowMode.Receive);
-
-        return result;
-    }
-
-    /**
-     * Add lights and shadows to the specified scene.
-     *
-     * @param scene (not null)
-     */
-    private void setupLightsAndShadows(Node scene) {
-        spotlight = new SpotLight();
-        scene.addLight(spotlight);
-
-        Vector3f position = new Vector3f(1f, 10f, 4f);
-        Vector3f direction = position.normalize().negateLocal();
-        spotlight.setDirection(direction);
-        spotlight.setPosition(position);
-        spotlight.setSpotInnerAngle(0.004f);
-        spotlight.setSpotOuterAngle(0.1f);
-
-        // a PointLight to fake indirect lighting from the ground
-        pointLight = new PointLight();
-        scene.addLight(pointLight);
-
-        pointLight.setColor(ColorRGBA.White.mult(1.5f));
-        pointLight.setPosition(Vector3f.UNIT_Z);
-        pointLight.setRadius(2f);
-
-        AssetManager assetManager = application.getAssetManager();
-        shadowRenderer = new SpotLightShadowRenderer(assetManager, 512);
-        application.getViewPort().addProcessor(shadowRenderer);
-        shadowRenderer.setEdgeFilteringMode(EdgeFilteringMode.PCF8);
-        shadowRenderer.setLight(spotlight);
-        shadowRenderer.setShadowIntensity(0.3f);
-    }
-
-    /**
-     * Create and attach a Quad to hide what's happening in the main scene.
-     *
-     * @return a new instance
-     */
-    private void setupShutter() {
-        AssetManager assetManager = application.getAssetManager();
-        Material material = new Material(assetManager, Materials.UNSHADED);
-        material.setColor("Color", new ColorRGBA(0.4f, 0.4f, 0.4f, 1f));
-
-        Camera camera = application.getCamera();
-        Mesh mesh = new Quad(camera.getWidth(), camera.getHeight());
-        shutter = new Geometry("shutter", mesh);
-        shutter.setMaterial(material);
-
-        application.getGuiNode().attachChild(shutter);
-    }
-
-    /**
-     * Set the stage for the Cinematic.
-     */
-    private void setupStage() {
-        Node rootNode = application.getRootNode();
-        setupLightsAndShadows(rootNode);
-
-        Camera camera = application.getCamera();
-        camera.setLocation(new Vector3f(0f, 1.2f, 2.7f));
-        camera.lookAt(new Vector3f(0f, 0.5f, 0f), Vector3f.UNIT_Y);
-
-        Geometry floor = setupFloor();
-        rootNode.attachChild(floor);
-    }
-
-    /**
-     * Set up and play a short Cinematic of Jaime.
-     */
-    private void startCinematic() {
-        Node jaime = loadJaime();
-        application.getRootNode().attachChild(jaime);
-        jaime.move(0f, 0f, -3f);
-        setupCinematic(jaime);
-
-        getStateManager().attach(cinematic);
-        cinematic.play();
-    }
-
-    private void startThreads() {
-        /*
-         * Add all loadables to a queue.
-         */
-        int numLoadables = queue.size();
-        int maxPreloaders = 2;
-        int numPreloaders = Math.min(numLoadables, maxPreloaders);
-        int numThreadsToCreate = numPreloaders + 1;
-        latch = new CountDownLatch(numThreadsToCreate);
-        /*
-         * Start preload threads to warm up the AssetCache.
-         */
-        AssetManager assetManager = application.getAssetManager();
-        for (int threadIndex = 0; threadIndex < numPreloaders; ++threadIndex) {
-            Thread thread = new Preloader(queue, assetManager, latch);
-            thread.setPriority(Thread.MIN_PRIORITY);
-            thread.start();
-        }
-        /*
-         * Start an additional thread to initialize Lemur.
-         */
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                initializeLemur();
-                latch.countDown();
-            }
-        };
-        thread.setPriority(Thread.MIN_PRIORITY);
-        thread.start();
     }
 }
