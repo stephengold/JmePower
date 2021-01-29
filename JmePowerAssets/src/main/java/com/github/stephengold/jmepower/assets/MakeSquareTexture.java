@@ -54,7 +54,7 @@ public class MakeSquareTexture {
      * filesystem path to the asset directory/folder for output
      */
     final private static String assetDirPath
-            = "../LemurPower/src/main/resources/Textures/JmePower";
+            = "../JmePowerLibrary/src/main/resources/Textures/JmePower";
     // *************************************************************************
     // fields
 

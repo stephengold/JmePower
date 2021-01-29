@@ -1,9 +1,9 @@
 *.dll
 *.dylib
-*.pdb
 *.so
 /.gradle/
 /.nb-gradle/
 /JmePowerAssets/build/
+/JmePowerLibrary/build/
+/JmePowerLibrary/src/main/resources/Textures/JmePower/
 /LemurPower/build/
-/LemurPower/src/main/resources/Textures/JmePower/

@@ -40,7 +40,7 @@ public interface Loadable {
     /**
      * Load the assets of this Loadable without attaching them to any scene.
      *
-     * @param assetManager the AssetManager for loading (not null)
+     * @param assetManager for loading assets (not null)
      */
     void load(AssetManager assetManager);
 }

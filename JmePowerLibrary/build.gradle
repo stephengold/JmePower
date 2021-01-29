@@ -7,24 +7,26 @@ plugins {
     id 'maven-publish'
 }
 
-description = 'the LemurPower library for jMonkeyEngine'
+description = 'the JmePower library for jMonkeyEngine'
 ext {
-    artifact = 'LemurPower'
+    artifact = 'JmePower'
     metadata = jmeTarget
 
     if (metadata.equals('')) {
-        version = lemurPowerVersion
+        version = jmePowerVersion
     } else {
-        version = "${lemurPowerVersion}+${metadata}"
+        version = "${jmePowerVersion}+${metadata}"
     }
     baseName = "${artifact}-${version}" // for POM and class JAR
 
     if (jmeTarget.equals('')) {
-        srcVersion = lemurPowerVersion
+        srcVersion = jmePowerVersion
     } else {
-        srcVersion = "${lemurPowerVersion}+${jmeTarget}"
+        srcVersion = "${jmePowerVersion}+${jmeTarget}"
     }
     srcBaseName = "${artifact}-${srcVersion}" // for javadoc JAR and sources JAR
+
+    resourcesDir = 'src/main/resources/'
 }
 
 jar { archiveBaseName = project.ext.baseName }
@@ -32,12 +34,10 @@ javadocJar { archiveBaseName = project.ext.srcBaseName }
 sourcesJar { archiveBaseName = project.ext.srcBaseName }
 
 dependencies {
-    api 'com.github.stephengold:JmePower:' + jmePowerVersion
-    //api project(':JmePowerLibrary')
-
-    api 'com.simsilica:lemur:1.14.0'
     api 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion
 }
+
+processResources.dependsOn(':JmePowerAssets:poweredBy')
 
 build.dependsOn('pom')
 task('pom', type: Copy) {

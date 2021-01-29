@@ -30,7 +30,8 @@ ext {
 
     // current releases of various libraries
     jmonkeyengineVersion = '3.3.2-stable'
-    lemurPowerVersion = '0.2.1-SNAPSHOT'
+    jmePowerVersion = '0.3.0'
+    lemurPowerVersion = '0.3.0'
 }
 
 repositories {

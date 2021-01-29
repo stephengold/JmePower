@@ -2,10 +2,10 @@
 //   for this project. This initialization is applied in the "build.gradle"
 //   of the root project.
 
-description = 'Generate assets used in LemurPower.'
+description = 'Generate assets used in the JmePower libraries.'
 ext {
     // output directories
-    assets = '../LemurPower/src/main/resources/'
+    assets = '../JmePowerLibrary/src/main/resources/'
 
     // generated texture files
     poweredByTex = assets + 'Textures/JmePower/powered-by.jpeg'
@@ -18,7 +18,7 @@ dependencies {
 
 task textures {
     dependsOn 'poweredBy'
-    description 'Generate texture assets used in LemurPower.'
+    description 'Generate texture assets used in JmePower.'
 }
 task poweredBy(type: JavaExec) {
     main 'com.github.stephengold.jmepower.assets.MakePoweredBy'
