@@ -1,5 +1,10 @@
 # Release log for the JmePower project
 
+## Version 0.3.0 released on 29 January 2021
+
+Split off the JmePowerLibrary sub-project.  Now there are 2 libraries
+(JmePower and LemurPower) with LemurPower depending on JmePower.
+
 ## Version 0.2.0 released on 27 January 2021
 
 + Pass the `AssetManager` to `load()` methods. (API change)

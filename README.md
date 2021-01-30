@@ -1,10 +1,12 @@
 The [JmePower Project][jmepower] is about promoting
 the [jMonkeyEngine game engine][jme].
 
-It contains 2 sub-projects:
+It contains 3 sub-projects:
 
- 1. LemurPower: a startup library for applications that use Lemur
- 2. JmePowerAssets: generate assets included in LemurPower
+ 1. JmePowerLibrary: the JmePower startup library for jMonkeyEngine applications
+ 2. LemurPower: an extension of the JmePower library
+    for applications that use Lemur
+ 3. JmePowerAssets: generate assets included in JmePowerLibrary
 
 Complete source code (in Java) is provided.
 
@@ -21,9 +23,9 @@ The source code has [a BSD 3-Clause license][license].
     if you don't already have one.
  2. Download and extract the source code from GitHub:
    + using Git:
-     + `git clone https://github.com/stephengold/JmePower.git
+     + `git clone https://github.com/stephengold/JmePower.git`
      + `cd JmePower`
-     + `git checkout -b latest 0.2.0`
+     + `git checkout -b latest 0.3.0`
    + using a web browser:
      + browse to https://github.com/stephengold/JmePower/releases/latest
      + follow the "Source code (zip)" link
@@ -38,7 +40,8 @@ The source code has [a BSD 3-Clause license][license].
    + using Windows Command Prompt:  `.\gradlew build`
 
 After a successful build,
-Maven artifacts will be found in `LemurPower/build/libs`.
+Maven artifacts will be found
+in `JmePowerLibrary/build/libs` and `LemurPower/build/libs`.
 
 You can install the Maven artifacts to your local cache:
  + using Bash:  `./gradlew install`
@@ -50,14 +53,14 @@ You can install the Maven artifacts to your local cache:
 Adding JmePower to an existing [jMonkeyEngine][jme] project should be
 a simple 3-step process:
 
- 1. Add the LemurPower library and its dependencies to the classpaths.
- 2. Add code to instantiate and attach a `LemurLoadingState`.
+ 1. Add the appropriate libraries to the classpaths.
+ 2. Add code to instantiate and attach an `AppState`.
  3. Add code to await completion.
 
 ### Add to the classpaths
 
-The LemurPower library depends on
-the standard jme3-core library from jMonkeyEngine
+The JmePower library depends on the standard jme3-core library.
+The LemurPower library depends on the JmePower library
 and also on [the Lemur toolkit][lemur].
 
 For projects built using Maven or Gradle, the build tools should automatically
@@ -74,13 +77,25 @@ Add to the project’s "build.gradle" file:
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:LemurPower:0.2.0'
+        compile 'com.github.stephengold:JmePower:0.3.0'
+    }
+
+OR
+
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        compile 'com.github.stephengold:LemurPower:0.3.0'
         runtime 'org.codehaus.groovy:groovy-jsr223:3.0.7'
     }
 
 ### Instantiate and attach an AppState
 
-The `LemurLoadingState` constructor takes an array of objects
+For an application that don't use Lemur, instantiate a `JmeLoadingState`.
+For an application that uses Lemur, instantiate a `LemurLoadingState`.
+
+The `AppState` constructor takes an array of objects
 to be preloaded into the application's asset cache.
 If there are none, the array can be empty.
 
