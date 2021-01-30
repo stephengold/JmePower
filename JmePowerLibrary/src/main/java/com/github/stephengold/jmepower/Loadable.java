@@ -29,7 +29,7 @@ package com.github.stephengold.jmepower;
 import com.jme3.asset.AssetManager;
 
 /**
- * A JMonkeyEngine object that contains loadable assets.
+ * A JMonkeyEngine object that contains loadable assets. TODO use Heart library
  *
  * @author Stephen Gold sgold@sonic.net
  */
