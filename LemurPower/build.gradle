@@ -32,8 +32,8 @@ javadocJar { archiveBaseName = project.ext.srcBaseName }
 sourcesJar { archiveBaseName = project.ext.srcBaseName }
 
 dependencies {
-    api 'com.github.stephengold:JmePower:' + jmePowerVersion
-    //api project(':JmePowerLibrary')
+    //api 'com.github.stephengold:JmePower:' + jmePowerVersion
+    api project(':JmePowerLibrary')
 
     api 'com.simsilica:lemur:1.14.0'
     api 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion
