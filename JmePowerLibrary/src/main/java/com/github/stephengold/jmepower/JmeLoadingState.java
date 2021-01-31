@@ -66,6 +66,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 import jme3utilities.Loadable;
+import jme3utilities.Validate;
 
 /**
  * An AppState to display a Cinematic while warming up the AssetCache. When its
@@ -186,6 +187,8 @@ public class JmeLoadingState extends BaseAppState {
      * @param numAdditionalThreads (&ge;0)
      */
     protected void startThreads(int numAdditionalThreads) {
+        Validate.nonNegative(numAdditionalThreads,
+                "number of additional threads");
         /*
          * Add all of the loadables to a queue.
          */
@@ -236,7 +239,7 @@ public class JmeLoadingState extends BaseAppState {
     @Override
     protected void onDisable() {
         if (shutter != null) {
-            shutter.removeFromParent();
+            shutter.removeFromParent(); // TODO application should do this
             shutter = null;
         }
 
@@ -409,6 +412,7 @@ public class JmeLoadingState extends BaseAppState {
     private Geometry setupFloor() {
         AssetManager assetManager = application.getAssetManager();
 
+        // TODO use MyAsset
         String assetPath = "/Textures/JmePower/powered-by.jpeg";
         Texture tex = assetManager.loadTexture(assetPath);
         Material material = new Material(assetManager, Materials.LIGHTING);

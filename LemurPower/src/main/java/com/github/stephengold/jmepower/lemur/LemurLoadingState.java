@@ -33,6 +33,7 @@ import com.simsilica.lemur.style.BaseStyles;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 import jme3utilities.Loadable;
+import jme3utilities.Validate;
 
 /**
  * An AppState to display a Cinematic while warming up the AssetCache and
@@ -69,6 +70,8 @@ public class LemurLoadingState extends JmeLoadingState {
      */
     @Override
     protected void startThreads(int numAdditionalThreads) {
+        Validate.nonNegative(numAdditionalThreads,
+                "number of additional threads");
         super.startThreads(numAdditionalThreads + 1);
         /*
          * Start an additional thread to initialize Lemur.
