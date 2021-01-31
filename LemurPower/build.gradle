@@ -36,7 +36,6 @@ dependencies {
     api project(':JmePowerLibrary')
 
     api 'com.simsilica:lemur:1.14.0'
-    api 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion
 }
 
 build.dependsOn('pom')
