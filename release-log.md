@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 0.4.0 released on TBD
+## Version 0.4.0 released on 30 January 2021
 
 + Build using Heart v6.4.0 and use its version of the `Loadable` class.
 + Add the `JmePowerVersion` class.

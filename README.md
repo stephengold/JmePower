@@ -25,7 +25,7 @@ The source code has [a BSD 3-Clause license][license].
    + using Git:
      + `git clone https://github.com/stephengold/JmePower.git`
      + `cd JmePower`
-     + `git checkout -b latest 0.3.0`
+     + `git checkout -b latest 0.4.0`
    + using a web browser:
      + browse to https://github.com/stephengold/JmePower/releases/latest
      + follow the "Source code (zip)" link
@@ -59,7 +59,8 @@ a simple 3-step process:
 
 ### Add to the classpaths
 
-The JmePower library depends on the standard jme3-core library.
+The JmePower library depends on the standard jme3-core library and
+[the Heart library][heart].
 The LemurPower library depends on the JmePower library
 and also on [the Lemur toolkit][lemur].
 
@@ -77,7 +78,7 @@ Add to the project’s "build.gradle" file:
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:JmePower:0.3.0'
+        compile 'com.github.stephengold:JmePower:0.4.0'
     }
 
 OR
@@ -86,7 +87,7 @@ OR
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:LemurPower:0.3.0'
+        compile 'com.github.stephengold:LemurPower:0.4.0'
         runtime 'org.codehaus.groovy:groovy-jsr223:3.0.7'
     }
 
@@ -130,6 +131,7 @@ A `SimpleApplication` might check for completion in `simpleUpdate()`:
 
 
 [groovy]: https://groovy-lang.org/ "Groovy Project"
+[heart]: https://github.com/stephengold/Heart "Heart Project"
 [jaime]: https://github.com/stephengold/JmePower/tree/master/LemurPower/src/main/resources/Models/Jaime "Jaime model"
 [jme]: https://jmonkeyengine.org "JMonkeyEngine Project"
 [jmepower]: https://github.com/stephengold/JmePower "JmePower Project"
