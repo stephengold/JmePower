@@ -65,6 +65,7 @@ import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
+import jme3utilities.Loadable;
 
 /**
  * An AppState to display a Cinematic while warming up the AssetCache. When its

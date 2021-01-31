@@ -30,6 +30,7 @@ import com.jme3.asset.AssetManager;
 import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
+import jme3utilities.Loadable;
 
 /**
  * A Thread used to preload assets into the AssetCache.

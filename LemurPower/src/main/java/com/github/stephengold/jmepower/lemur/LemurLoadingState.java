@@ -27,12 +27,12 @@
 package com.github.stephengold.jmepower.lemur;
 
 import com.github.stephengold.jmepower.JmeLoadingState;
-import com.github.stephengold.jmepower.Loadable;
 import com.jme3.app.Application;
 import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.style.BaseStyles;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
+import jme3utilities.Loadable;
 
 /**
  * An AppState to display a Cinematic while warming up the AssetCache and

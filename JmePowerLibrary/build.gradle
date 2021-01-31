@@ -35,6 +35,7 @@ sourcesJar { archiveBaseName = project.ext.srcBaseName }
 
 dependencies {
     api 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion
+    api 'com.github.stephengold:Heart:' + heartVersion
 }
 
 processResources.dependsOn(':JmePowerAssets:poweredBy')
