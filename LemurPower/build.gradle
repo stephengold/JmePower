@@ -7,7 +7,7 @@ plugins {
     id 'maven-publish'
 }
 
-description = 'the LemurPower library for jMonkeyEngine'
+description = 'a startup screen for jMonkeyEngine + Lemur'
 ext {
     artifact = 'LemurPower'
     metadata = jmeTarget
@@ -36,7 +36,7 @@ task('pom', type: Copy) {
     dependsOn 'generatePomFileForMavenPublication'
     from "${buildDir}/publications/maven/pom-default.xml"
     into "${buildDir}/libs"
-    rename '.*', baseName + '.pom'
+    rename 'pom-default.xml', baseName + '.pom'
 }
 
 publishToMavenLocal.doLast {
@@ -49,6 +49,13 @@ publishing {
             artifactId artifact
             from components.java
             pom {
+                description = project.description
+                developers {
+                    developer {
+                        email = 'sgold@sonic.net'
+                        name = 'Stephen Gold'
+                    }
+                }
                 licenses {
                     license {
                         distribution = 'repo'
@@ -56,6 +63,13 @@ publishing {
                         url = 'https://opensource.org/licenses/BSD-3-Clause'
                     }
                 }
+                name = 'com.github.stephengold:' + artifact
+                scm {
+                    connection = 'scm:git:git://github.com/stephengold/JmePower.git'
+                    developerConnection = 'scm:git:ssh://github.com:stephengold/JmePower.git'
+                    url = 'https://github.com/stephengold/JmePower/tree/master'
+                }
+                url = 'https://github.com/stephengold/JmePower'
             }
             version project.ext.version
         }
