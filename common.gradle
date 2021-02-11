@@ -29,7 +29,7 @@ ext {
     jmeTarget = ''
 
     // current versions of various libraries
-    heartVersion = '6.4.0'
+    heartVersion = '6.4.2'
     jmonkeyengineVersion = '3.3.2-stable'
     jmePowerVersion = '0.4.1-SNAPSHOT'
     lemurPowerVersion = '0.4.1-SNAPSHOT'
@@ -37,7 +37,8 @@ ext {
 
 repositories {
     //mavenLocal()
-    jcenter()
+    mavenCentral()
+    jcenter() // for Lemur
 }
 
 // custom tasks for creating source/javadoc JARs
