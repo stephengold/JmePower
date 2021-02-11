@@ -17,21 +17,14 @@ ext {
     } else {
         version = "${jmePowerVersion}+${metadata}"
     }
-    baseName = "${artifact}-${version}" // for POM and class JAR
-
-    if (jmeTarget.equals('')) {
-        srcVersion = jmePowerVersion
-    } else {
-        srcVersion = "${jmePowerVersion}+${jmeTarget}"
-    }
-    srcBaseName = "${artifact}-${srcVersion}" // for javadoc JAR and sources JAR
+    baseName = "${artifact}-${version}"
 
     resourcesDir = 'src/main/resources/'
 }
 
 jar { archiveBaseName = project.ext.baseName }
-javadocJar { archiveBaseName = project.ext.srcBaseName }
-sourcesJar { archiveBaseName = project.ext.srcBaseName }
+javadocJar { archiveBaseName = project.ext.baseName }
+sourcesJar { archiveBaseName = project.ext.baseName }
 
 dependencies {
     api 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion

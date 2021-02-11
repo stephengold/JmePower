@@ -17,19 +17,12 @@ ext {
     } else {
         version = "${lemurPowerVersion}+${metadata}"
     }
-    baseName = "${artifact}-${version}" // for POM and class JAR
-
-    if (jmeTarget.equals('')) {
-        srcVersion = lemurPowerVersion
-    } else {
-        srcVersion = "${lemurPowerVersion}+${jmeTarget}"
-    }
-    srcBaseName = "${artifact}-${srcVersion}" // for javadoc JAR and sources JAR
+    baseName = "${artifact}-${version}"
 }
 
 jar { archiveBaseName = project.ext.baseName }
-javadocJar { archiveBaseName = project.ext.srcBaseName }
-sourcesJar { archiveBaseName = project.ext.srcBaseName }
+javadocJar { archiveBaseName = project.ext.baseName }
+sourcesJar { archiveBaseName = project.ext.baseName }
 
 dependencies {
     //api 'com.github.stephengold:JmePower:' + jmePowerVersion
