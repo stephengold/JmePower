@@ -1,5 +1,5 @@
 The [JmePower Project][jmepower] is about promoting
-the [jMonkeyEngine game engine][jme].
+[the jMonkeyEngine (JME) game engine][jme].
 
 It contains 3 sub-projects:
 
@@ -8,7 +8,8 @@ It contains 3 sub-projects:
     for applications that use Lemur
  3. JmePowerAssets: generate assets included in JmePowerLibrary
 
-Complete source code (in Java) is provided.
+Complete source code (in Java) is provided under
+[a 3-clause BSD license][license].
 
 ## Licensing
 
@@ -25,7 +26,7 @@ The source code has [a BSD 3-Clause license][license].
    + using Git:
      + `git clone https://github.com/stephengold/JmePower.git`
      + `cd JmePower`
-     + `git checkout -b latest 0.4.0`
+     + `git checkout -b latest 0.4.1`
    + using a web browser:
      + browse to https://github.com/stephengold/JmePower/releases/latest
      + follow the "Source code (zip)" link
@@ -75,19 +76,20 @@ so you may also need to add a Groovy library
 Add to the project’s "build.gradle" file:
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        compile 'com.github.stephengold:JmePower:0.4.0'
+        compile 'com.github.stephengold:JmePower:0.4.1'
     }
 
 OR
 
     repositories {
+        mavenCentral()
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:LemurPower:0.4.0'
+        compile 'com.github.stephengold:LemurPower:0.4.1'
         runtime 'org.codehaus.groovy:groovy-jsr223:3.0.7'
     }
 

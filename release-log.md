@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 0.4.1 released on TBD
+## Version 0.4.1 released on 11 February 2021
 
 + Publish to MavenCentral instead of JCenter.
 + Build using Gradle v6.8.2 and Heart v6.4.2 .
