@@ -1,5 +1,10 @@
 # Release log for the JmePower project
 
+## Version 0.4.1 released on TBD
+
++ Publish to MavenCentral instead of JCenter.
++ Build using Gradle v6.8.2 and Heart v6.4.2 .
+
 ## Version 0.4.0 released on 30 January 2021
 
 + Build using Heart v6.4.0 and use its version of the `Loadable` class.
