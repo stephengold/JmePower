@@ -79,17 +79,17 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        compile 'com.github.stephengold:JmePower:0.4.1'
+        implementation 'com.github.stephengold:JmePower:0.4.1'
     }
 
 OR
 
     repositories {
         mavenCentral()
-        jcenter()
+        maven { url 'https://jcenter.bintray.com/' } // for Lemur
     }
     dependencies {
-        compile 'com.github.stephengold:LemurPower:0.4.1'
+        implementation 'com.github.stephengold:LemurPower:0.4.1'
         runtime 'org.codehaus.groovy:groovy-jsr223:3.0.7'
     }
 
