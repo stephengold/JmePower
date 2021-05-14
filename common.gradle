@@ -54,20 +54,3 @@ task javadocJar(type: Jar) {
     description 'Create a JAR of javadoc.'
     from javadoc.destinationDir
 }
-
-// cleanup tasks
-
-clean.dependsOn('cleanDLLs', 'cleanDyLibs', 'cleanLogs', 'cleanSOs')
-
-task cleanDLLs(type: Delete) { // Windows native libraries
-    delete fileTree(dir: '.', include: '*.dll')
-}
-task cleanDyLibs(type: Delete) { // MacOSX native libraries
-    delete fileTree(dir: '.', include: '*.dylib')
-}
-task cleanLogs(type: Delete) { // JVM crash logs
-    delete fileTree(dir: '.', include: 'hs_err_pid*.log')
-}
-task cleanSOs(type: Delete) { // Linux and Android native libraries
-    delete fileTree(dir: '.', include: '*.so')
-}
