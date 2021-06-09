@@ -468,7 +468,7 @@ public class JmeLoadingState extends BaseAppState {
         application.getViewPort().addProcessor(shadowRenderer);
         shadowRenderer.setEdgeFilteringMode(EdgeFilteringMode.PCF8);
         shadowRenderer.setLight(spotlight);
-        shadowRenderer.setShadowIntensity(0.3f);
+        shadowRenderer.setShadowIntensity(0.5f);
     }
 
     /**
