@@ -10,9 +10,11 @@ Based on "Jaime":
 
 Files used without modification:
 * Jaime.j3m
-* Jaime.j3o
 * NormalMap.png
 * diffuseMap.jpg
+
+Derived files (also licensed BSD 3-Clause):
+* Jaime-new.j3o
 
 Added files (also licensed BSD 3-Clause):
 * license.txt

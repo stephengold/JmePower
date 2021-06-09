@@ -26,17 +26,16 @@
  */
 package com.github.stephengold.jmepower;
 
-import com.jme3.animation.AnimControl;
-import com.jme3.animation.Animation;
-import com.jme3.animation.AnimationFactory;
-import com.jme3.animation.LoopMode;
+import com.jme3.anim.AnimClip;
+import com.jme3.anim.AnimComposer;
+import com.jme3.anim.AnimFactory;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.Cinematic;
 import com.jme3.cinematic.PlayState;
-import com.jme3.cinematic.events.AnimationEvent;
+import com.jme3.cinematic.events.AnimEvent;
 import com.jme3.cinematic.events.CinematicEvent;
 import com.jme3.cinematic.events.CinematicEventListener;
 import com.jme3.input.InputManager;
@@ -325,30 +324,32 @@ public class JmeLoadingState extends BaseAppState {
     // private methods
 
     /**
-     * Load the Jaime model with an extra animation.
+     * Load the Jaime model with 2 extra animation clips.
      */
     private Node loadJaime() {
         AssetManager assetManager = application.getAssetManager();
-        Node result = (Node) assetManager.loadModel("/Models/Jaime/Jaime.j3o");
+        Node result
+                = (Node) assetManager.loadModel("/Models/Jaime/Jaime-new.j3o");
         result.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
         /*
-         * Add an 0.7-second Animation to translate Jaime forward in a jump.
+         * Add a 7-second clip to translate Jaime forward during a jump.
          */
-        AnimationFactory af = new AnimationFactory(0.7f, "JumpForward");
+        float fps = 30f;
+        AnimFactory af = new AnimFactory(7f, "JumpForward", fps);
         af.addTimeTranslation(0f, new Vector3f(0f, 0f, -3f));
         af.addTimeTranslation(0.35f, new Vector3f(0f, 1f, -1.5f));
-        af.addTimeTranslation(0.7f, Vector3f.ZERO);
-        Animation spatialAnimation = af.buildAnimation();
-        AnimControl animControl = result.getControl(AnimControl.class);
-        animControl.addAnim(spatialAnimation);
+        af.addTimeTranslation(0.7f, new Vector3f());
+        AnimClip forwardClip = af.buildAnimation(result);
+        AnimComposer composer = result.getControl(AnimComposer.class);
+        composer.addAnimClip(forwardClip);
         /*
-         * Add an 0.7-second Animation to translate Jaime upward in a jump.
+         * Add a 1-second clip to translate Jaime upward during a jump.
          */
-        af = new AnimationFactory(0.7f, "JumpUpward");
-        af.addTimeTranslation(0.0f, Vector3f.ZERO);
-        af.addTimeTranslation(0.7f, new Vector3f(0f, 3f, 0f));
-        spatialAnimation = af.buildAnimation();
-        animControl.addAnim(spatialAnimation);
+        af = new AnimFactory(1f, "JumpUpward", fps);
+        af.addTimeTranslation(0f, new Vector3f());
+        af.addTimeTranslation(0.7f, new Vector3f(0f, 4f, 0f));
+        AnimClip upClip = af.buildAnimation(result);
+        composer.addAnimClip(upClip);
 
         return result;
     }
@@ -360,34 +361,44 @@ public class JmeLoadingState extends BaseAppState {
      */
     private void setupCinematic(final Node jaime) {
         Node rootNode = application.getRootNode();
-        float duration = 60f; // seconds
+        float duration = 60f; // seconds, overridden by fitDuration()
         cinematic = new Cinematic(rootNode, duration);
+        AnimComposer composer = jaime.getControl(AnimComposer.class);
+        composer.makeLayer("SpatialLayer", null);
+        String boneLayer = AnimComposer.DEFAULT_LAYER;
 
-        cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "Idle", 0.5f, LoopMode.DontLoop));
+        AnimEvent idleHalfSecond = new AnimEvent(composer, "Idle", boneLayer);
+        idleHalfSecond.setInitialDuration(0.5f);
+        cinematic.enqueueCinematicEvent(idleHalfSecond);
         float jumpStart = cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "JumpStart")
-        );
+                new AnimEvent(composer, "JumpStart", boneLayer));
         cinematic.addCinematicEvent(jumpStart + 0.2f,
-                new AnimationEvent(jaime, "JumpForward", 1)
-        );
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "JumpEnd"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "Taunt"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "Punches"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "SideKick"));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "SideKick"));
+                new AnimEvent(composer, "JumpForward", "SpatialLayer"));
         cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "Idle", 1f, LoopMode.DontLoop));
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "Wave"));
+                new AnimEvent(composer, "JumpEnd", boneLayer));
+        cinematic.enqueueCinematicEvent(
+                new AnimEvent(composer, "Taunt", boneLayer));
+        cinematic.enqueueCinematicEvent(
+                new AnimEvent(composer, "Punches", boneLayer));
+        cinematic.enqueueCinematicEvent(
+                new AnimEvent(composer, "SideKick", boneLayer));
+        cinematic.enqueueCinematicEvent(
+                new AnimEvent(composer, "SideKick", boneLayer));
+        AnimEvent idleOneSecond = new AnimEvent(composer, "Idle", boneLayer);
+        idleOneSecond.setInitialDuration(1f);
+        cinematic.enqueueCinematicEvent(
+                idleOneSecond);
+        cinematic.enqueueCinematicEvent(
+                new AnimEvent(composer, "Wave", boneLayer));
         float jumpStart2 = cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "JumpStart")
-        );
+                new AnimEvent(composer, "JumpStart", boneLayer));
         cinematic.addCinematicEvent(jumpStart2 + 0.2f,
-                new AnimationEvent(jaime, "JumpUpward", 1)
-        );
-        cinematic.enqueueCinematicEvent(new AnimationEvent(jaime, "JumpEnd"));
+                new AnimEvent(composer, "JumpUpward", boneLayer));
         cinematic.enqueueCinematicEvent(
-                new AnimationEvent(jaime, "Idle", 0.2f, LoopMode.DontLoop));
+                new AnimEvent(composer, "JumpEnd", boneLayer));
+        AnimEvent idleShort = new AnimEvent(composer, "Idle", boneLayer);
+        idleShort.setInitialDuration(0.2f);
+        cinematic.enqueueCinematicEvent(idleShort);
 
         cinematic.addListener(new CinematicEventListener() {
             @Override
