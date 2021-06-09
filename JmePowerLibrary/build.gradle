@@ -34,6 +34,8 @@ dependencies {
 
 processResources.dependsOn(':JmePowerAssets:poweredBy')
 
+// publishing tasks
+
 build.dependsOn('pom', 'pomAsc')
 task('pom', type: Copy) {
     dependsOn 'generatePomFileForMavenPublication'
@@ -97,6 +99,8 @@ publishing {
     }
 }
 generateMetadataFileForMavenPublication.dependsOn('pom')
+
+// signing tasks
 
 signing {
     sign publishing.publications.maven

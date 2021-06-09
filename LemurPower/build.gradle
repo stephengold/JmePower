@@ -32,6 +32,8 @@ dependencies {
     api 'com.simsilica:lemur:1.15.0'
 }
 
+// publishing tasks
+
 build.dependsOn('pom', 'pomAsc')
 task('pom', type: Copy) {
     dependsOn 'generatePomFileForMavenPublication'
@@ -95,6 +97,8 @@ publishing {
     }
 }
 generateMetadataFileForMavenPublication.dependsOn('pom')
+
+// signing tasks
 
 signing {
     sign publishing.publications.maven
