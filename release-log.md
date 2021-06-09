@@ -1,5 +1,12 @@
 # Release log for the JmePower project
 
+## Version 0.4.2 released on TBD
+
++ Use the new (com.jme3.anim) animation system.
++ Darken shadows.
++ Build using Gradle v7.0.2, Heart v6.4.4, JME v3.4.0-stable,
+  and Lemur v1.15.0 .
+
 ## Version 0.4.1 released on 11 February 2021
 
 + Publish to MavenCentral instead of JCenter.
