@@ -29,8 +29,8 @@ ext {
     jmeTarget = ''
 
     // current versions of various libraries
-    heartVersion = '6.4.2'
-    jmonkeyengineVersion = '3.3.2-stable'
+    heartVersion = '6.4.4'
+    jmonkeyengineVersion = '3.4.0-stable'
     jmePowerVersion = '0.4.2-SNAPSHOT'
     lemurPowerVersion = '0.4.2-SNAPSHOT'
 }
