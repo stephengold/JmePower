@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 0.4.2 released on TBD
+## Version 0.4.2 released on 9 June 2021
 
 + Use the new (com.jme3.anim) animation system.
 + Darken shadows.

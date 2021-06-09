@@ -32,7 +32,7 @@ ext {
     heartVersion = '6.4.4'
     jmonkeyengineVersion = '3.4.0-stable'
     jmePowerVersion = '0.4.2'
-    lemurPowerVersion = '0.4.2'
+    lemurPowerVersion = '0.4.3-SNAPSHOT'
 }
 
 repositories {
