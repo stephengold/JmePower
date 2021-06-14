@@ -21,7 +21,7 @@ task textures {
     description 'Generate texture assets used in JmePower.'
 }
 task poweredBy(type: JavaExec) {
-    main 'com.github.stephengold.jmepower.assets.MakePoweredBy'
+    mainClass = 'com.github.stephengold.jmepower.assets.MakePoweredBy'
     outputs.files([poweredByTex])
 }
 
