@@ -36,8 +36,9 @@ The source code has [a BSD 3-Clause license][license].
  3. Set the `JAVA_HOME` environment variable:
    + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
    + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
+   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
  4. Run the [Gradle] wrapper:
-   + using Bash:  `./gradlew build`
+   + using Bash or PowerShell:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
 
 After a successful build,
@@ -45,9 +46,12 @@ Maven artifacts will be found
 in `JmePowerLibrary/build/libs` and `LemurPower/build/libs`.
 
 You can install the Maven artifacts to your local Maven repository:
- + using Bash:  `./gradlew install`
+ + using Bash or PowerShell:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
 
+You can restore the project to a pristine state:
+ + using Bash or PowerShell: `./gradlew clean`
+ + using Windows Command Prompt: `.\gradlew clean`
 
 ## How to add JmePower to an existing project
 
