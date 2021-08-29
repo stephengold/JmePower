@@ -1,5 +1,9 @@
 # Release log for the JmePower project
 
+## Version 0.4.3 releases on TBD
+
+Build using Gradle v7.2 and Heart v7.0.0.
+
 ## Version 0.4.2 released on 9 June 2021
 
 + Use the new (com.jme3.anim) animation system.
