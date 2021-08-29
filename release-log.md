@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 0.4.3 releases on TBD
+## Version 0.4.3 releases on 29 August 2021
 
 Build using Gradle v7.2 and Heart v7.0.0.
 
