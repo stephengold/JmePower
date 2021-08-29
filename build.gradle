@@ -9,12 +9,10 @@ subprojects {
 // publishing tasks
 
 task('install') {
-    dependsOn ':JmePowerLibrary:publishToMavenLocal', \
-     ':LemurPower:publishToMavenLocal'
+    dependsOn ':JmePowerLibrary:install', ':LemurPower:install'
     description 'Installs Maven artifacts to the local repository.'
 }
 task('release') {
-    dependsOn ':JmePowerLibrary:publishMavenPublicationToOSSRHRepository', \
-     ':LemurPower:publishMavenPublicationToOSSRHRepository'
+    dependsOn ':JmePowerLibrary:release', ':LemurPower:release'
     description 'Stages Maven artifacts to Sonatype OSSRH.'
 }
