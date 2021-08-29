@@ -29,7 +29,7 @@ ext {
     jmeTarget = ''
 
     // current versions of various libraries
-    heartVersion = '6.4.4'
+    heartVersion = '7.0.0'
     jmonkeyengineVersion = '3.4.0-stable'
     jmePowerVersion = '0.4.2'
     lemurPowerVersion = '0.4.3-SNAPSHOT'
@@ -43,13 +43,13 @@ repositories {
 
 // custom tasks for creating source/javadoc JARs
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     dependsOn 'classes'
     description 'Create a JAR of source files.'
     from sourceSets.main.allJava
 }
 task javadocJar(type: Jar) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     dependsOn 'javadoc'
     description 'Create a JAR of javadoc.'
     from javadoc.destinationDir
