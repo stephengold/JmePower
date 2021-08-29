@@ -22,13 +22,13 @@ The source code has [a BSD 3-Clause license][license].
 
  1. Install a [Java Development Kit (JDK)][openJDK],
     if you don't already have one.
- 2. Download and extract the source code from GitHub:
+ 2. Download and extract the JmePower source code from GitHub:
    + using Git:
      + `git clone https://github.com/stephengold/JmePower.git`
      + `cd JmePower`
      + `git checkout -b latest 0.4.2`
    + using a web browser:
-     + browse to https://github.com/stephengold/JmePower/releases/latest
+     + browse to [the latest release][latest]
      + follow the "Source code (zip)" link
      + save the ZIP file
      + extract the contents of the saved ZIP file
@@ -44,7 +44,7 @@ After a successful build,
 Maven artifacts will be found
 in `JmePowerLibrary/build/libs` and `LemurPower/build/libs`.
 
-You can install the Maven artifacts to your local cache:
+You can install the Maven artifacts to your local Maven repository:
  + using Bash:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
 
@@ -67,7 +67,7 @@ and also on [the Lemur toolkit][lemur].
 
 For projects built using Maven or Gradle, the build tools should automatically
 resolve the compile-time dependencies.
-However, the Lemur toolkit requires [Groovy][] support at runtime,
+However, the Lemur toolkit requires [Groovy] support at runtime,
 so you may also need to add a Groovy library
 (such as groovy-jsr223 or groovy-all) to the runtime classpath.
 
@@ -132,10 +132,11 @@ A `SimpleApplication` might check for completion in `simpleUpdate()`:
     }
 
 
+[gradle]: https://gradle.org "Gradle Project"
 [groovy]: https://groovy-lang.org/ "Groovy Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [jaime]: https://github.com/stephengold/JmePower/tree/master/JmePowerLibrary/src/main/resources/Models/Jaime "Jaime model"
-[jme]: https://jmonkeyengine.org "JMonkeyEngine Project"
+[jme]: https://jmonkeyengine.org "jMonkeyEngine Project"
 [jmepower]: https://github.com/stephengold/JmePower "JmePower Project"
 [latest]: https://github.com/stephengold/JmePower/releases/latest "latest release"
 [lemur]: https://github.com/jMonkeyEngine-Contributions/Lemur "Lemur toolkit"
