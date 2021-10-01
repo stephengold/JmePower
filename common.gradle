@@ -1,8 +1,18 @@
-// Gradle settings and tasks common to all subprojects
+// Gradle settings and tasks common to all JmePower subprojects
 
 apply plugin: 'java'
 
 group = 'com.github.stephengold'
+
+ext {
+    jmeTarget = ''
+
+    // current versions of various libraries:
+    heartVersion = '7.1.0'
+    jmonkeyengineVersion = '3.4.0-stable'
+    jmePowerVersion = '0.4.4-SNAPSHOT'
+    lemurPowerVersion = '0.4.4-SNAPSHOT'
+}
 
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
@@ -25,16 +35,6 @@ gradle.projectsEvaluated {
     }
 }
 
-ext {
-    jmeTarget = ''
-
-    // current versions of various libraries
-    heartVersion = '7.1.0'
-    jmonkeyengineVersion = '3.4.0-stable'
-    jmePowerVersion = '0.4.4-SNAPSHOT'
-    lemurPowerVersion = '0.4.4-SNAPSHOT'
-}
-
 repositories {
     //mavenLocal()
     mavenCentral()
@@ -42,14 +42,15 @@ repositories {
 }
 
 // custom tasks for creating source/javadoc JARs
-task sourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
-    description 'Create a JAR of source files.'
-    from sourceSets.main.allJava
-}
 task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     dependsOn 'javadoc'
     description 'Create a JAR of javadoc.'
     from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    description 'Create a JAR of source files.'
+    from sourceSets.main.allJava
 }
