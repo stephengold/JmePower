@@ -2,10 +2,9 @@
 
 apply plugin: 'java'
 
-group = 'com.github.stephengold'
-
 ext {
     jmeTarget = ''
+    group = 'com.github.stephengold'
 
     // current versions of various libraries:
     heartVersion = '7.1.0'
@@ -26,7 +25,6 @@ gradle.projectsEvaluated {
     }
     tasks.withType(JavaExec) { // Java runtime options:
         classpath sourceSets.main.runtimeClasspath
-        //doFirst { println commandLine }
         enableAssertions true
         //jvmArgs '-verbose:gc'
         //jvmArgs '-Xms1024m', '-Xmx1024m'
@@ -42,6 +40,7 @@ repositories {
 }
 
 // custom tasks for creating source/javadoc JARs
+
 task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     dependsOn 'javadoc'

@@ -68,6 +68,7 @@ publishing {
             artifact sourcesJar
             artifactId artifact
             from components.java
+            groupId project.ext.group
             pom {
                 description = project.description
                 developers {
@@ -83,7 +84,7 @@ publishing {
                         url = 'https://opensource.org/licenses/BSD-3-Clause'
                     }
                 }
-                name = 'com.github.stephengold:' + artifact
+                name = project.ext.group + ':' + artifact
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/JmePower.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/JmePower.git'
