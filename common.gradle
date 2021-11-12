@@ -5,6 +5,7 @@ apply plugin: 'java'
 ext {
     jmeTarget = ''
     group = 'com.github.stephengold'
+    websiteUrl = 'https://github.com/stephengold/JmePower'
 
     // current versions of various libraries:
     heartVersion = '7.1.0'

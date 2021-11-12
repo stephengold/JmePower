@@ -86,9 +86,9 @@ publishing {
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/JmePower.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/JmePower.git'
-                    url = 'https://github.com/stephengold/JmePower/tree/master'
+                    url = project.ext.websiteUrl + '/tree/master'
                 }
-                url = 'https://github.com/stephengold/JmePower'
+                url = project.ext.websiteUrl
             }
             version project.ext.version
         }

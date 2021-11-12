@@ -18,7 +18,7 @@ ext {
     } else {
         version = "${jmePowerVersion}+${metadata}"
     }
-    baseName = "${artifact}-${version}"
+    baseName = "${artifact}-${version}" // for POM and class JAR
 
     resourcesDir = 'src/main/resources/'
 }
@@ -38,7 +38,7 @@ processResources.dependsOn(':JmePowerAssets:poweredBy')
 
 task('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
-    description 'Installs Maven artifacts to the local repository.'
+    description 'Installs Maven artifacts to the local Maven repository.'
 }
 task('release') {
     dependsOn 'publishMavenPublicationToOSSRHRepository'
@@ -88,9 +88,9 @@ publishing {
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/JmePower.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/JmePower.git'
-                    url = 'https://github.com/stephengold/JmePower/tree/master'
+                    url = project.ext.websiteUrl + '/tree/master'
                 }
-                url = 'https://github.com/stephengold/JmePower'
+                url = project.ext.websiteUrl
             }
             version project.ext.version
         }
