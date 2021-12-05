@@ -9,7 +9,7 @@ ext {
 
     // current versions of various libraries:
     heartVersion = '7.1.0'
-    jmonkeyengineVersion = '3.4.0-stable'
+    jmonkeyengineVersion = '3.4.1-stable'
     jmePowerVersion = '0.4.4-SNAPSHOT'
     lemurPowerVersion = '0.4.4-SNAPSHOT'
 }
