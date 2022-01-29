@@ -94,7 +94,7 @@ OR
     }
     dependencies {
         implementation 'com.github.stephengold:LemurPower:0.4.3'
-        runtime 'org.codehaus.groovy:groovy-jsr223:3.0.8'
+        runtime 'org.codehaus.groovy:groovy-jsr223:3.0.9'
     }
 
 ### Instantiate and attach an AppState
