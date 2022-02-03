@@ -12,7 +12,7 @@ ext {
 }
 
 dependencies {
-    implementation 'com.github.stephengold:Heart:' + heartVersion
+    implementation heartCoordinates
     implementation 'org.imgscalr:imgscalr-lib:4.2'
 }
 
