@@ -8,7 +8,6 @@ plugins {
     id 'signing'
 }
 
-description = 'a startup screen for jMonkeyEngine + Lemur'
 ext {
     artifact = 'LemurPower'
     metadata = jmeTarget
