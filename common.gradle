@@ -24,6 +24,9 @@ tasks.withType(JavaCompile) { // Java compile-time options:
     options.compilerArgs << '-Xlint:unchecked'
     options.deprecation = true // to provide detailed deprecation warnings
     options.encoding = 'UTF-8'
+    if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_10)) {
+        options.release = 8
+    }
 }
 
 tasks.withType(JavaExec) { // Java runtime options:
@@ -31,7 +34,6 @@ tasks.withType(JavaExec) { // Java runtime options:
     enableAssertions true
     //jvmArgs '-verbose:gc'
     //jvmArgs '-Xms1024m', '-Xmx1024m'
-    //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
 }
 
 repositories {
