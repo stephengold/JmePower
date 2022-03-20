@@ -15,11 +15,11 @@ dependencies {
     implementation 'org.imgscalr:imgscalr-lib:4.2'
 }
 
-task textures {
+tasks.register('textures') {
     dependsOn 'poweredBy'
     description 'Generate texture assets used in JmePower.'
 }
-task poweredBy(type: JavaExec) {
+tasks.register('poweredBy', JavaExec) {
     mainClass = 'com.github.stephengold.jmepower.assets.MakePoweredBy'
     outputs.files([poweredByTex])
 }
@@ -27,7 +27,7 @@ task poweredBy(type: JavaExec) {
 // cleanup tasks
 clean.dependsOn('cleanTextures')
 
-task cleanTextures(type: Delete) {
+tasks.register('cleanTextures', Delete) {
     delete(poweredByTex)
     description 'Delete generated texture assets.'
 }
