@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2021, Stephen Gold
+ Copyright (c) 2020-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -453,7 +453,7 @@ public class JmeLoadingState extends BaseAppState {
         spotlight.setDirection(direction);
         spotlight.setPosition(position);
         spotlight.setSpotInnerAngle(0.004f);
-        spotlight.setSpotOuterAngle(0.1f);
+        spotlight.setSpotOuterAngle(0.12f);
 
         // a PointLight to fake indirect lighting from the ground
         pointLight = new PointLight();
