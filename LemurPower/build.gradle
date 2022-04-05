@@ -24,7 +24,7 @@ dependencies {
     //api 'com.github.stephengold:JmePower:' + jmePowerVersion
     api project(':JmePowerLibrary')
 
-    api 'com.simsilica:lemur:1.15.0'
+    api 'com.simsilica:lemur:1.16.0'
 }
 
 // publishing tasks
