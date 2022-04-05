@@ -1,5 +1,7 @@
+// Gradle build script for the JmePower project
+
 plugins {
-    id 'base' // To add "clean" task to the root project.
+    id 'base' // to add a "clean" task to the root project
 }
 
 subprojects {
@@ -8,11 +10,11 @@ subprojects {
 
 // publishing tasks
 
-task('install') {
+tasks.register('install') {
     dependsOn ':JmePowerLibrary:install', ':LemurPower:install'
     description 'Installs Maven artifacts to the local repository.'
 }
-task('release') {
+tasks.register('release') {
     dependsOn ':JmePowerLibrary:release', ':LemurPower:release'
     description 'Stages Maven artifacts to Sonatype OSSRH.'
 }
