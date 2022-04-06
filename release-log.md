@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 0.4.4 released on TBD
+## Version 0.4.4 released on 5 April 2022
 
 + Widen the spotlight's outer angle in the loading screen.
 + Target Java v8+.

@@ -1,3 +1,5 @@
+# JmePower Project
+
 The [JmePower Project][jmepower] is about promoting
 [the jMonkeyEngine (JME) game engine][jme].
 
@@ -20,37 +22,40 @@ The source code has [a BSD 3-Clause license][license].
 
 ## How to build JmePower from source
 
- 1. Install a [Java Development Kit (JDK)][openJDK],
+ 1. Install a [Java Development Kit (JDK)][adoptium],
     if you don't already have one.
- 2. Download and extract the JmePower source code from GitHub:
-   + using Git:
+ 2. Point the `JAVA_HOME` environment variable to your JDK installation:
+    (The path might be something like "C:\Program Files\Java\jre1.8.0_301"
+    or "/usr/lib/jvm/java-8-openjdk-amd64/" or
+    "/Library/Java/JavaVirtualMachines/liberica-jdk-17-full.jdk/Contents/Home" .)
+   + using Bash or Zsh: `export JAVA_HOME="` *path to installation* `"`
+   + using Windows Command Prompt: `set JAVA_HOME="` *path to installation* `"`
+   + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
+ 3. Download and extract the JmePower source code from GitHub:
+   + using [Git]:
      + `git clone https://github.com/stephengold/JmePower.git`
      + `cd JmePower`
-     + `git checkout -b latest 0.4.3`
+     + `git checkout -b latest 0.4.4`
    + using a web browser:
      + browse to [the latest release][latest]
      + follow the "Source code (zip)" link
      + save the ZIP file
      + extract the contents of the saved ZIP file
      + `cd` to the extracted directory/folder
- 3. Set the `JAVA_HOME` environment variable:
-   + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
-   + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
-   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
  4. Run the [Gradle] wrapper:
-   + using Bash or PowerShell:  `./gradlew build`
+   + using Bash or PowerShell or Zsh:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
 
 After a successful build,
 Maven artifacts will be found
 in `JmePowerLibrary/build/libs` and `LemurPower/build/libs`.
 
-You can install the Maven artifacts to your local Maven repository:
- + using Bash or PowerShell:  `./gradlew install`
+You can install the artifacts to your local Maven repository:
+ + using Bash or PowerShell or Zsh:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
 
 You can restore the project to a pristine state:
- + using Bash or PowerShell: `./gradlew clean`
+ + using Bash or PowerShell or Zsh:  `./gradlew clean`
  + using Windows Command Prompt: `.\gradlew clean`
 
 ## How to add JmePower to an existing project
@@ -83,18 +88,17 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        implementation 'com.github.stephengold:JmePower:0.4.3'
+        implementation 'com.github.stephengold:JmePower:0.4.4'
     }
 
 OR
 
     repositories {
         mavenCentral()
-        maven { url 'https://jcenter.bintray.com/' } // for Lemur
     }
     dependencies {
-        implementation 'com.github.stephengold:LemurPower:0.4.3'
-        runtime 'org.codehaus.groovy:groovy-jsr223:3.0.9'
+        implementation 'com.github.stephengold:LemurPower:0.4.4'
+        runtime 'org.codehaus.groovy:groovy-jsr223:3.0.10'
     }
 
 ### Instantiate and attach an AppState
@@ -136,6 +140,8 @@ A `SimpleApplication` might check for completion in `simpleUpdate()`:
     }
 
 
+[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
+[git]: https://git-scm.com "Git"
 [gradle]: https://gradle.org "Gradle Project"
 [groovy]: https://groovy-lang.org/ "Groovy Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"

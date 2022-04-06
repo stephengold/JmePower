@@ -59,6 +59,6 @@ public class JmePowerVersion {
      * @return the branch and revision string (not null, not empty)
      */
     public static String versionShort() {
-        return "master 0.4.4";
+        return "master 0.4.5-SNAPSHOT";
     }
 }
