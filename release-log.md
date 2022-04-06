@@ -1,8 +1,15 @@
 # Release log for the JmePower project
 
-## Version 0.4.3 releases on 29 August 2021
+## Version 0.4.4 released on TBD
 
-Build using Gradle v7.2 and Heart v7.0.0.
++ Widen the spotlight's outer angle in the loading screen.
++ Target Java v8+.
++ Build using Gradle v7.4.2, Heart v7.5.0, JME v3.5.1-stable,
+  and Lemur v1.16.0 .
+
+## Version 0.4.3 released on 29 August 2021
+
+Build using Gradle v7.2 and Heart v7.0.0 .
 
 ## Version 0.4.2 released on 9 June 2021
 

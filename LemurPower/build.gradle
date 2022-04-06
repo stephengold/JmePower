@@ -21,8 +21,8 @@ ext {
 }
 
 dependencies {
-    //api 'com.github.stephengold:JmePower:' + jmePowerVersion
-    api project(':JmePowerLibrary')
+    api 'com.github.stephengold:JmePower:' + jmePowerVersion
+    //api project(':JmePowerLibrary')
 
     api 'com.simsilica:lemur:1.16.0'
 }
