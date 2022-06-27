@@ -3,12 +3,10 @@
 The [JmePower Project][jmepower] is about promoting
 [the jMonkeyEngine (JME) game engine][jme].
 
-It contains 3 sub-projects:
+It contains 2 sub-projects:
 
 1. JmePowerLibrary: the JmePower startup library for jMonkeyEngine applications
-2. LemurPower: an extension of the JmePower library
-   for applications that use Lemur
-3. JmePowerAssets: generate assets included in JmePowerLibrary
+2. JmePowerAssets: generate assets included in the library
 
 Complete source code (in Java) is provided under
 [a 3-clause BSD license][license].
@@ -48,7 +46,7 @@ The source code has [a BSD 3-Clause license][license].
 
 After a successful build,
 Maven artifacts will be found
-in `JmePowerLibrary/build/libs` and `LemurPower/build/libs`.
+in `JmePowerLibrary/build/libs`.
 
 You can install the artifacts to your local Maven repository:
 + using Bash or PowerShell or Zsh: `./gradlew install`
@@ -71,14 +69,9 @@ a simple 3-step process:
 
 The JmePower library depends on the standard jme3-core library and
 [the Heart library][heart].
-The LemurPower library depends on the JmePower library
-and also on [the Lemur toolkit][lemur].
 
 For projects built using Maven or Gradle, the build tools should automatically
 resolve the compile-time dependencies.
-However, the Lemur toolkit requires [Groovy] support at runtime,
-so you may also need to add a Groovy library
-(such as groovy-jsr223 or groovy-all) to the runtime classpath.
 
 #### Gradle-built projects
 
@@ -91,20 +84,9 @@ Add to the project’s "build.gradle" file:
         implementation 'com.github.stephengold:JmePower:0.4.4'
     }
 
-OR
-
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        implementation 'com.github.stephengold:LemurPower:0.4.4'
-        runtime 'org.codehaus.groovy:groovy-jsr223:3.0.11'
-    }
-
 ### Instantiate and attach an AppState
 
-For an application that don't use Lemur, instantiate a `JmeLoadingState`.
-For an application that uses Lemur, instantiate a `LemurLoadingState`.
+Instantiate a `JmeLoadingState`.
 
 The `AppState` constructor takes an array of objects
 to be preloaded into the application's asset cache.
@@ -113,7 +95,7 @@ If there are none, the array can be empty.
 Depending on the application's structure, the instance might be
 attached explicitly in `simpleInitApp()`:
 
-    LemurLoadingState loading = new LemurLoadingState(preloadArray);
+    JmeLoadingState loading = new JmeLoadingState(preloadArray);
     stateManager.attach(loading);
 
 or it might be passed to the application's constructor:
@@ -121,7 +103,7 @@ or it might be passed to the application's constructor:
     private MyApplication() {
         super(
                 // other appstates, if desired ...
-                new LemurLoadingState(preloadArray)
+                new JmeLoadingState(preloadArray)
         );
     }
 
@@ -132,8 +114,8 @@ A `SimpleApplication` might check for completion in `simpleUpdate()`:
 
     @Override
     public void simpleUpdate(float tpf) {
-        AppState loading = stateManager.getState(LemurLoadingState.class);
-        if (loading != null && !loader.isEnabled()) {
+        AppState loading = stateManager.getState(JmeLoadingState.class);
+        if (loading != null && !loading.isEnabled()) {
             getStateManager().detach(loading);
             // additional startup, if desired ...
         }
@@ -143,12 +125,10 @@ A `SimpleApplication` might check for completion in `simpleUpdate()`:
 [adoptium]: https://adoptium.net/releases.html "Adoptium Project"
 [git]: https://git-scm.com "Git"
 [gradle]: https://gradle.org "Gradle Project"
-[groovy]: https://groovy-lang.org/ "Groovy Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [jaime]: https://github.com/stephengold/JmePower/tree/master/JmePowerLibrary/src/main/resources/Models/Jaime "Jaime model"
 [jme]: https://jmonkeyengine.org "jMonkeyEngine Project"
 [jmepower]: https://github.com/stephengold/JmePower "JmePower Project"
 [latest]: https://github.com/stephengold/JmePower/releases/latest "latest release"
-[lemur]: https://github.com/jMonkeyEngine-Contributions/Lemur "Lemur toolkit"
 [license]: https://github.com/stephengold/JmePower/blob/master/license.txt "JmePower license"
 [openJDK]: https://openjdk.java.net "OpenJDK Project"

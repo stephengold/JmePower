@@ -300,10 +300,7 @@ public class JmeLoadingState extends BaseAppState {
          */
         long latchCount = latch.getCount();
         if (latchCount < 1L) {
-            /*
-             * Lemur has been initialized, and all asynchronous asset loads
-             * have completed.
-             */
+            // All asynchronous asset loads have completed.
             setupShutter();
 
             Node rootNode = application.getRootNode();
