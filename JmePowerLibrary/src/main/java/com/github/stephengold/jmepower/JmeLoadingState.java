@@ -473,8 +473,6 @@ public class JmeLoadingState extends BaseAppState {
 
     /**
      * Create and attach a Quad to hide what's happening in the main scene.
-     *
-     * @return a new instance
      */
     private void setupShutter() {
         AssetManager assetManager = application.getAssetManager();
