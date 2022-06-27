@@ -65,6 +65,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 import jme3utilities.Loadable;
+import jme3utilities.MyAsset;
 import jme3utilities.Validate;
 
 /**
@@ -423,11 +424,9 @@ public class JmeLoadingState extends BaseAppState {
     private Geometry setupFloor() {
         AssetManager assetManager = application.getAssetManager();
 
-        // TODO use MyAsset
         String assetPath = "/Textures/JmePower/powered-by.jpeg";
         Texture tex = assetManager.loadTexture(assetPath);
-        Material material = new Material(assetManager, Materials.LIGHTING);
-        material.setTexture("DiffuseMap", tex);
+        Material material = MyAsset.createShadedMaterial(assetManager, tex);
 
         Quad mesh = new Quad(2.2f, 2.2f);
         Geometry result = new Geometry("floor", mesh);
