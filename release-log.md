@@ -1,5 +1,11 @@
 # Release log for the JmePower project
 
+## Version 1.0.0 released on TBD
+
++ Delete the LemurPower subproject.
++ Depend on Heart v8.0.0 and JME v3.5.2-stable.
++ Add the "checkstyle" plugin to the build.
+
 ## Version 0.4.4 released on 5 April 2022
 
 + Widen the spotlight's outer angle in the loading screen.
