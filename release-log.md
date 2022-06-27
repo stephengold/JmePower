@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 1.0.0 released on TBD
+## Version 1.0.0 released on 27 June 2022
 
 + Delete the LemurPower subproject.
 + Depend on Heart v8.0.0 and JME v3.5.2-stable.

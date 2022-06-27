@@ -33,7 +33,7 @@ The source code has [a BSD 3-Clause license][license].
   + using [Git]:
     + `git clone https://github.com/stephengold/JmePower.git`
     + `cd JmePower`
-    + `git checkout -b latest 0.4.4`
+    + `git checkout -b latest 1.0.0`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link
@@ -81,7 +81,7 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        implementation 'com.github.stephengold:JmePower:0.4.4'
+        implementation 'com.github.stephengold:JmePower:1.0.0'
     }
 
 ### Instantiate and attach an AppState
