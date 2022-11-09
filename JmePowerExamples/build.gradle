@@ -6,7 +6,7 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'mygame.HelloJmePower'
+mainClassName = 'jme3test.helloworld.HelloJmePower'
 if (!hasProperty('mainClass')) {
     ext.mainClass = mainClassName
 }

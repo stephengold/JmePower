@@ -29,7 +29,8 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package mygame;
+
+package jme3test.helloworld;
 
 import com.github.stephengold.jmepower.JmeLoadingState;
 import com.jme3.app.DebugKeysAppState;
@@ -43,7 +44,6 @@ import com.jme3.cinematic.events.AnimEvent;
 import com.jme3.material.Material;
 import com.jme3.material.MaterialDef;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import java.util.logging.Level;
