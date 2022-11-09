@@ -196,19 +196,17 @@ public class JmeLoadingState extends BaseAppState {
      * @param numAdditionalThreads (&ge;0)
      */
     protected void startThreads(int numAdditionalThreads) {
-        Validate.nonNegative(numAdditionalThreads,
-                "number of additional threads");
-        /*
-         * Add all of the loadables to a queue.
-         */
+        Validate.nonNegative(
+                numAdditionalThreads, "number of additional threads");
+
+        // Add all of the loadables to a queue.
         int numLoadables = queue.size();
         int maxPreloaders = 2;
         int numPreloaders = Math.min(numLoadables, maxPreloaders);
         int numThreadsToCreate = numPreloaders + numAdditionalThreads;
         this.latch = new CountDownLatch(numThreadsToCreate);
-        /*
-         * Start preload threads to warm up the AssetCache.
-         */
+
+        // Start preload threads to warm up the AssetCache.
         AssetManager assetManager = application.getAssetManager();
         for (int threadIndex = 0; threadIndex < numPreloaders; ++threadIndex) {
             Thread thread = new Preloader(queue, assetManager, latch);
@@ -312,9 +310,8 @@ public class JmeLoadingState extends BaseAppState {
                     return;
                 }
         }
-        /*
-         * The Cinematic completed or was cancelled by the user.
-         */
+
+        // The Cinematic completed or was cancelled by the user.
         long latchCount = latch.getCount();
         if (latchCount < 1L) {
             // All asynchronous asset loads have completed.
@@ -346,9 +343,8 @@ public class JmeLoadingState extends BaseAppState {
         Node result
                 = (Node) assetManager.loadModel("/Models/Jaime/Jaime-new.j3o");
         result.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
-        /*
-         * Add a 7-second clip to translate Jaime forward during a jump.
-         */
+
+        // Add a 7-second clip to translate Jaime forward during a jump.
         float fps = 30f;
         AnimFactory af = new AnimFactory(7f, "JumpForward", fps);
         af.addTimeTranslation(0f, new Vector3f(0f, 0f, -3f));
@@ -357,9 +353,8 @@ public class JmeLoadingState extends BaseAppState {
         AnimClip forwardClip = af.buildAnimation(result);
         AnimComposer composer = result.getControl(AnimComposer.class);
         composer.addAnimClip(forwardClip);
-        /*
-         * Add a 1-second clip to translate Jaime upward during a jump.
-         */
+
+        // Add a 1-second clip to translate Jaime upward during a jump.
         af = new AnimFactory(1f, "JumpUpward", fps);
         af.addTimeTranslation(0f, new Vector3f());
         af.addTimeTranslation(0.7f, new Vector3f(0f, 4f, 0f));
@@ -401,8 +396,7 @@ public class JmeLoadingState extends BaseAppState {
                 new AnimEvent(composer, "SideKick", boneLayer));
         AnimEvent idleOneSecond = new AnimEvent(composer, "Idle", boneLayer);
         idleOneSecond.setInitialDuration(1f);
-        cinematic.enqueueCinematicEvent(
-                idleOneSecond);
+        cinematic.enqueueCinematicEvent(idleOneSecond);
         cinematic.enqueueCinematicEvent(
                 new AnimEvent(composer, "Wave", boneLayer));
         float jumpStart2 = cinematic.enqueueCinematicEvent(
