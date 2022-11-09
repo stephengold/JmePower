@@ -12,6 +12,8 @@ if (!hasProperty('mainClass')) {
 }
 jar.manifest.attributes('Main-Class': mainClassName)
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+
 dependencies {
     implementation 'org.jmonkeyengine:jme3-core:' + jme3Version
     runtimeOnly 'org.jmonkeyengine:jme3-desktop:' + jme3Version
