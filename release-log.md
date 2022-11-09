@@ -1,5 +1,15 @@
 # Release log for the JmePower project
 
+## Version 1.1.0 released on TBD
+
++ Bugfix:  if the tasks finish quickly, the cinematic may terminate too soon.
++ Add the JmePowerExamples subproject.
++ Display status in the upper-left corner of the loading screen.
++ Save/restore the camera's state.
++ Log the latency of each task.
++ Publicize the logger of the `Preloader` class.
++ Build using Gradle v7.5.1 and Heart v8.2.0.
+
 ## Version 1.0.0 released on 27 June 2022
 
 + Delete the LemurPower subproject.
