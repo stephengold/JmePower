@@ -286,7 +286,7 @@ public class JmeLoadingState extends BaseAppState {
                 break;
             case 3:
                 startCinematic();
-                break;
+                return;
 
             default: // 4 or more
                 PlayState playState = cinematic.getPlayState();

@@ -70,10 +70,6 @@ public class HelloJmePower extends SimpleApplication {
                 (Loadable) (AssetManager am) -> {
                     AssetKey<MaterialDef> key = new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md");
                     am.loadAsset(key);
-                    try {
-                        Thread.sleep(1000L);
-                    } catch (InterruptedException exception) {
-                    }
                 }
         );
         stateManager.attach(loading);
