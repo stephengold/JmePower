@@ -337,6 +337,8 @@ public class JmeLoadingState extends BaseAppState {
 
     /**
      * Load the Jaime model with 2 extra animation clips.
+     *
+     * @return a new Node
      */
     private Node loadJaime() {
         AssetManager assetManager = application.getAssetManager();

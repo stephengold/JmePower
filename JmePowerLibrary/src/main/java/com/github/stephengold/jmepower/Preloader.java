@@ -83,6 +83,9 @@ public class Preloader extends Thread {
     // *************************************************************************
     // new methods exposed
 
+    /**
+     * De-queue loadables and load them into the asset cache.
+     */
     @Override
     public void run() {
         Loadable loadable;
