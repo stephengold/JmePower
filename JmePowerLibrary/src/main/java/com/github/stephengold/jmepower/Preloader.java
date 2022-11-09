@@ -29,6 +29,7 @@ package com.github.stephengold.jmepower;
 import com.jme3.asset.AssetManager;
 import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Loadable;
 
@@ -91,13 +92,17 @@ public class Preloader extends Thread {
                 break;
             }
 
-//            long startMillis = System.currentTimeMillis();
+            long startNanos = System.nanoTime();
             loadable.load(assetManager);
 
-//            String name = loadable.getClass().getSimpleName();
-//            long latencyMillis = System.currentTimeMillis() - startMillis;
-//            float seconds = latencyMillis / 1_000f;
-//            System.out.println("loaded " + name + " in " + seconds + " sec.");
+            if (logger.isLoggable(Level.INFO)) {
+                String name = loadable.getClass().getSimpleName();
+                long latencyNanos = System.nanoTime() - startNanos;
+                float seconds = latencyNanos / 1e9f;
+                String message
+                        = String.format("loaded %s in %.6f sec", name, seconds);
+                logger.log(Level.INFO, message);
+            }
         }
 
         completionLatch.countDown();
