@@ -1,0 +1,27 @@
+// Note: "common.gradle" in the root project contains additional initialization
+//   for this project. This initialization is applied in the "build.gradle"
+//   of the root project.
+
+plugins {
+    id 'application'
+}
+
+mainClassName = 'mygame.HelloJmePower'
+if (!hasProperty('mainClass')) {
+    ext.mainClass = mainClassName
+}
+jar.manifest.attributes('Main-Class': mainClassName)
+
+dependencies {
+    implementation 'org.jmonkeyengine:jme3-core:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-desktop:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
+
+    // JmePowerExamples doesn't use jme3-jogg nor jme3-plugins
+    //  -- they are included solely to avoid warnings from AssetConfig.
+    runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-plugins:' + jme3Version
+
+    //implementation 'com.github.stephengold:JmePower' + wesVersion // for published library
+    implementation project(':JmePowerLibrary') // for latest sourcecode
+}

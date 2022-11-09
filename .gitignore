@@ -5,6 +5,7 @@
 /.idea/
 /.nb-gradle/
 /JmePowerAssets/build/
+/JmePowerExamples/build/
 /JmePowerLibrary/build/
 /JmePowerLibrary/src/main/resources/Textures/JmePower/
 /LemurPower/build/
