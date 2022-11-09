@@ -136,13 +136,14 @@ public class JmeLoadingState extends BaseAppState {
      */
     private int updateCount = 0;
     /**
-     * assets to be preloaded
-     */
-    final private Queue<Loadable> queue;
-    /**
      * secondary lighting for the Cinematic
      */
     private PointLight pointLight;
+    /**
+    /**
+     * assets to be preloaded
+     */
+    final private Queue<Loadable> queue;
     /**
      * access the AssetManager, InputManager, and scene graphs
      */
