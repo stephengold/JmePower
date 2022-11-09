@@ -3,10 +3,11 @@
 The [JmePower Project][jmepower] is about promoting
 [the jMonkeyEngine (JME) game engine][jme].
 
-It contains 2 sub-projects:
+It contains 3 sub-projects:
 
 1. JmePowerLibrary: the JmePower startup library for jMonkeyEngine applications
 2. JmePowerAssets: generate assets included in the library
+3. JmePowerExamples: sample applications using the library
 
 Complete source code (in Java) is provided under
 [a 3-clause BSD license][license].
@@ -33,7 +34,7 @@ The source code has [a BSD 3-Clause license][license].
   + using [Git]:
     + `git clone https://github.com/stephengold/JmePower.git`
     + `cd JmePower`
-    + `git checkout -b latest 1.0.0`
+    + `git checkout -b latest 1.1.0`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link
@@ -81,7 +82,7 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        implementation 'com.github.stephengold:JmePower:1.0.0'
+        implementation 'com.github.stephengold:JmePower:1.1.0'
     }
 
 ### Instantiate and attach an AppState

@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 1.1.0 released on TBD
+## Version 1.1.0 released on 9 November 2022
 
 + Bugfix:  if the tasks finish quickly, the cinematic may terminate too soon.
 + Add the JmePowerExamples subproject.
