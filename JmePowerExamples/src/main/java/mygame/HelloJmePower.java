@@ -68,7 +68,8 @@ public class HelloJmePower extends SimpleApplication {
         AnimEvent.logger.setLevel(Level.WARNING);
         JmeLoadingState loading = new JmeLoadingState(
                 (Loadable) (AssetManager am) -> {
-                    AssetKey<MaterialDef> key = new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md");
+                    AssetKey<MaterialDef> key = new AssetKey<>(
+                            "Common/MatDefs/Misc/Unshaded.j3md");
                     am.loadAsset(key);
                 }
         );
@@ -85,12 +86,12 @@ public class HelloJmePower extends SimpleApplication {
         cam.setLocation(new Vector3f(0f, 0f, 10f));
 
         Box b = new Box(1, 1, 1); // create cube shape
-        Geometry geom = new Geometry("Box", b);  // create cube geometry from the shape
+        Geometry geom = new Geometry("Box", b);  // create cube geometry
         Material mat = new Material(assetManager,
-                "Common/MatDefs/Misc/Unshaded.j3md");  // create a simple material
-        mat.setColor("Color", ColorRGBA.Blue);   // set color of material to blue
-        geom.setMaterial(mat);                   // set the cube's material
-        rootNode.attachChild(geom);              // make the cube appear in the scene
+                "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", ColorRGBA.Blue);
+        geom.setMaterial(mat);       // set the cube's material
+        rootNode.attachChild(geom);  // make the cube appear in the scene
     }
 
     @Override
