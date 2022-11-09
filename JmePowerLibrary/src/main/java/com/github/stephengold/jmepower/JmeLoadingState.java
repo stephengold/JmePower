@@ -38,6 +38,8 @@ import com.jme3.cinematic.PlayState;
 import com.jme3.cinematic.events.AnimEvent;
 import com.jme3.cinematic.events.CinematicEvent;
 import com.jme3.cinematic.events.CinematicEventListener;
+import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -121,6 +123,10 @@ public class JmeLoadingState extends BaseAppState {
         }
     };
     /**
+     * display status in the upper-left corner of the GUI node
+     */
+    private BitmapText textNode;
+    /**
      * entertain the user
      */
     private Cinematic cinematic;
@@ -132,6 +138,10 @@ public class JmeLoadingState extends BaseAppState {
      * hide what happens in the main scene
      */
     private Geometry shutter;
+    /**
+     * total number of tasks
+     */
+    final private int numLoadables;
     /**
      * count update()s for scheduling
      */
@@ -173,7 +183,7 @@ public class JmeLoadingState extends BaseAppState {
      * @param loadables the assets to preload (not null)
      */
     public JmeLoadingState(Loadable... loadables) {
-        int numLoadables = loadables.length;
+        this.numLoadables = loadables.length;
         this.queue = new ArrayBlockingQueue<>(numLoadables);
         List<Loadable> list = Arrays.asList(loadables);
         queue.addAll(list);
@@ -249,6 +259,11 @@ public class JmeLoadingState extends BaseAppState {
         camera.setLocation(savedCameraLocation);
         camera.setRotation(savedCameraOrientation);
 
+        if (textNode != null) {
+            textNode.removeFromParent();
+            textNode = null;
+        }
+
         if (shutter != null) {
             shutter.removeFromParent(); // TODO application should do this
             this.shutter = null;
@@ -291,6 +306,7 @@ public class JmeLoadingState extends BaseAppState {
     @Override
     public void update(float tpf) {
         ++updateCount;
+        long latchCount;
         switch (updateCount) {
             case 1:
                 setupStage();
@@ -298,12 +314,27 @@ public class JmeLoadingState extends BaseAppState {
             case 2:
                 int numAdditionalThreads = 0;
                 startThreads(numAdditionalThreads);
-                break;
+                return;
             case 3:
                 startCinematic();
                 return;
 
             default: // 4 or more
+                Camera camera = application.getCamera();
+                float displayHeight = camera.getHeight();
+                textNode.setLocalTranslation(0f, displayHeight, 0f);
+
+                latchCount = latch.getCount();
+                String message;
+                if (latchCount > 0) {
+                    long numDone = numLoadables - latchCount;
+                    message = String.format(
+                            "Loaded %d of %d", numDone, numLoadables);
+                } else {
+                    message = "Press [tab] to proceed.";
+                }
+                textNode.setText(message);
+
                 PlayState playState = cinematic.getPlayState();
                 if (playState == PlayState.Paused
                         || playState == PlayState.Playing) {
@@ -312,7 +343,6 @@ public class JmeLoadingState extends BaseAppState {
         }
 
         // The Cinematic completed or was cancelled by the user.
-        long latchCount = latch.getCount();
         if (latchCount < 1L) {
             // All asynchronous asset loads have completed.
             setupShutter();
@@ -509,6 +539,12 @@ public class JmeLoadingState extends BaseAppState {
 
         Geometry floor = setupFloor();
         rootNode.attachChild(floor);
+
+        AssetManager assetManager = application.getAssetManager();
+        BitmapFont font = assetManager.loadFont("Interface/Fonts/Default.fnt");
+        this.textNode = new BitmapText(font);
+        Node guiRootNode = application.getGuiNode();
+        guiRootNode.attachChild(textNode);
     }
 
     /**
