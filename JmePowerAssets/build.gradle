@@ -24,7 +24,7 @@ tasks.register('poweredBy', JavaExec) {
     outputs.files([poweredByTex])
 }
 
-// cleanup tasks
+// cleanup tasks:
 clean.dependsOn('cleanTextures')
 
 tasks.register('cleanTextures', Delete) {
