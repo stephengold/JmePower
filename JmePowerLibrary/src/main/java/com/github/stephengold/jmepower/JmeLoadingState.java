@@ -174,7 +174,7 @@ public class JmeLoadingState extends BaseAppState {
      */
     public JmeLoadingState(Loadable... loadables) {
         int numLoadables = loadables.length;
-        queue = new ArrayBlockingQueue<>(numLoadables);
+        this.queue = new ArrayBlockingQueue<>(numLoadables);
         List<Loadable> list = Arrays.asList(loadables);
         queue.addAll(list);
     }
@@ -205,7 +205,7 @@ public class JmeLoadingState extends BaseAppState {
         int maxPreloaders = 2;
         int numPreloaders = Math.min(numLoadables, maxPreloaders);
         int numThreadsToCreate = numPreloaders + numAdditionalThreads;
-        latch = new CountDownLatch(numThreadsToCreate);
+        this.latch = new CountDownLatch(numThreadsToCreate);
         /*
          * Start preload threads to warm up the AssetCache.
          */
@@ -253,7 +253,7 @@ public class JmeLoadingState extends BaseAppState {
 
         if (shutter != null) {
             shutter.removeFromParent(); // TODO application should do this
-            shutter = null;
+            this.shutter = null;
         }
 
         InputManager inputManager = application.getInputManager();
@@ -377,7 +377,7 @@ public class JmeLoadingState extends BaseAppState {
     private void setupCinematic(final Node jaime) {
         Node rootNode = application.getRootNode();
         float duration = 60f; // seconds, overridden by fitDuration()
-        cinematic = new Cinematic(rootNode, duration);
+        this.cinematic = new Cinematic(rootNode, duration);
         AnimComposer composer = jaime.getControl(AnimComposer.class);
         composer.makeLayer("SpatialLayer", null);
         String boneLayer = AnimComposer.DEFAULT_LAYER;
@@ -458,7 +458,7 @@ public class JmeLoadingState extends BaseAppState {
      * @param scene (not null)
      */
     private void setupLightsAndShadows(Node scene) {
-        spotlight = new SpotLight();
+        this.spotlight = new SpotLight();
         scene.addLight(spotlight);
 
         Vector3f position = new Vector3f(1f, 10f, 4f);
@@ -469,7 +469,7 @@ public class JmeLoadingState extends BaseAppState {
         spotlight.setSpotOuterAngle(0.12f);
 
         // a PointLight to fake indirect lighting from the ground
-        pointLight = new PointLight();
+        this.pointLight = new PointLight();
         scene.addLight(pointLight);
 
         pointLight.setColor(ColorRGBA.White.mult(1.5f));
@@ -477,7 +477,7 @@ public class JmeLoadingState extends BaseAppState {
         pointLight.setRadius(2f);
 
         AssetManager assetManager = application.getAssetManager();
-        shadowRenderer = new SpotLightShadowRenderer(assetManager, 512);
+        this.shadowRenderer = new SpotLightShadowRenderer(assetManager, 512);
         application.getViewPort().addProcessor(shadowRenderer);
         shadowRenderer.setEdgeFilteringMode(EdgeFilteringMode.PCF8);
         shadowRenderer.setLight(spotlight);
@@ -494,7 +494,7 @@ public class JmeLoadingState extends BaseAppState {
 
         Camera camera = application.getCamera();
         Mesh mesh = new Quad(camera.getWidth(), camera.getHeight());
-        shutter = new Geometry("shutter", mesh);
+        this.shutter = new Geometry("shutter", mesh);
         shutter.setMaterial(material);
 
         application.getGuiNode().attachChild(shutter);
