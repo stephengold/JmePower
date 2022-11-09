@@ -48,6 +48,7 @@ import com.jme3.material.Material;
 import com.jme3.material.Materials;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
@@ -140,6 +141,9 @@ public class JmeLoadingState extends BaseAppState {
      */
     private PointLight pointLight;
     /**
+     * camera orientation prior to onEnable()
+     */
+    private Quaternion savedCameraOrientation;
     /**
      * assets to be preloaded
      */
@@ -156,6 +160,10 @@ public class JmeLoadingState extends BaseAppState {
      * shadows for the Cinematic
      */
     private SpotLightShadowRenderer shadowRenderer;
+    /**
+     * camera location prior to onEnable()
+     */
+    private Vector3f savedCameraLocation;
     // *************************************************************************
     // constructors
 
@@ -239,6 +247,10 @@ public class JmeLoadingState extends BaseAppState {
      */
     @Override
     protected void onDisable() {
+        Camera camera = application.getCamera();
+        camera.setLocation(savedCameraLocation);
+        camera.setRotation(savedCameraOrientation);
+
         if (shutter != null) {
             shutter.removeFromParent(); // TODO application should do this
             shutter = null;
@@ -266,6 +278,10 @@ public class JmeLoadingState extends BaseAppState {
         inputManager.addListener(pauseListener, pauseAction);
         trigger = new KeyTrigger(KeyInput.KEY_PAUSE);
         inputManager.addMapping(pauseAction, trigger);
+
+        Camera camera = application.getCamera();
+        this.savedCameraLocation = camera.getLocation().clone();
+        this.savedCameraOrientation = camera.getRotation().clone();
     }
 
     /**

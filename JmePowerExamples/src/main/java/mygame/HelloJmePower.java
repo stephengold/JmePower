@@ -83,8 +83,6 @@ public class HelloJmePower extends SimpleApplication {
                 new StatsAppState()
         );
 
-        cam.setLocation(new Vector3f(0f, 0f, 10f));
-
         Box b = new Box(1, 1, 1); // create cube shape
         Geometry geom = new Geometry("Box", b);  // create cube geometry
         Material mat = new Material(assetManager,
