@@ -12,7 +12,7 @@ ext {
     heartCoordinates = 'com.github.stephengold:Heart:8.3.1' + jmeTarget
 
     // current versions of libraries:
-    jme3Version = '3.6.0-beta3'
+    jme3Version = '3.6.0-stable'
     jmePowerVersion = '1.1.1-SNAPSHOT'
 }
 
