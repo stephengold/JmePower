@@ -1,5 +1,10 @@
 # Release log for the JmePower project
 
+## Version 1.1.1 released on TBD
+
++ Depend on Heart v8.3.2 and JME v3.6.0-stable.
++ Build using Gradle v8.0.2.
+
 ## Version 1.1.0 released on 9 November 2022
 
 + Bugfix:  if the tasks finish quickly, the cinematic may terminate too soon.
