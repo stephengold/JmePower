@@ -17,7 +17,7 @@ dependencies {
 
 tasks.register('textures') {
     dependsOn 'poweredBy'
-    description 'Generate texture assets used in JmePower.'
+    description 'Generates texture assets used in JmePower.'
 }
 tasks.register('poweredBy', JavaExec) {
     mainClass = 'com.github.stephengold.jmepower.assets.MakePoweredBy'
@@ -29,5 +29,5 @@ clean.dependsOn('cleanTextures')
 
 tasks.register('cleanTextures', Delete) {
     delete(poweredByTex)
-    description 'Delete generated texture assets.'
+    description 'Deletes generated texture assets.'
 }
