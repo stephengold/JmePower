@@ -34,7 +34,7 @@ The source code has [a BSD 3-Clause license][license].
   + using [Git]:
     + `git clone https://github.com/stephengold/JmePower.git`
     + `cd JmePower`
-    + `git checkout -b latest 1.1.0`
+    + `git checkout -b latest 1.1.1`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link
@@ -46,8 +46,7 @@ The source code has [a BSD 3-Clause license][license].
   + using Windows Command Prompt: `.\gradlew build`
 
 After a successful build,
-Maven artifacts will be found
-in `JmePowerLibrary/build/libs`.
+Maven artifacts will be found in `JmePowerLibrary/build/libs`.
 
 You can install the artifacts to your local Maven repository:
 + using Bash or PowerShell or Zsh: `./gradlew install`
@@ -82,7 +81,7 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        implementation 'com.github.stephengold:JmePower:1.1.0'
+        implementation 'com.github.stephengold:JmePower:1.1.1'
     }
 
 ### Instantiate and attach an AppState

@@ -13,7 +13,7 @@ ext {
 
     // current versions of libraries:
     jme3Version = '3.6.0-stable'
-    jmePowerVersion = '1.1.1'
+    jmePowerVersion = '1.1.2-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_7

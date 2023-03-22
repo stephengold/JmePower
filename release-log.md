@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 1.1.1 released on TBD
+## Version 1.1.1 released on 21 March 2023
 
 + Depend on Heart v8.3.2 and JME v3.6.0-stable.
 + Build using Gradle v8.0.2.
