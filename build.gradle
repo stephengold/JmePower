@@ -8,6 +8,13 @@ subprojects {
     apply from: rootProject.file('common.gradle')
 }
 
+tasks.register('checkstyle') {
+    dependsOn ':JmePowerAssets:checkstyleMain', \
+        ':JmePowerExamples:checkstyleMain', \
+        ':JmePowerLibrary:checkstyleMain'
+    description 'Runs the checkstyle tool on all sourcecode.'
+}
+
 // publishing tasks
 
 tasks.register('install') {
