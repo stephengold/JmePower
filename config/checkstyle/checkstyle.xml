@@ -366,14 +366,16 @@
             <property name="exceptionVariableName" value="expected"/>
         </module>
         <module name="CommentsIndentation">
-            <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
+            <property name="tokens" value="SINGLE_LINE_COMMENT, BLOCK_COMMENT_BEGIN"/>
         </module>
 
         <!-- Checks for size violations.                  -->
         <!-- See https://checkstyle.org/config_sizes.html -->
-        <module name="MethodLength"/>
+        <module name="MethodLength">
+            <property name="max" value="60"/>
+        </module>
         <module name="ParameterNumber">
-            <property name="max" value="9"/>
+            <property name="max" value="4"/>
         </module>
 
         <!-- Checks for whitespace                             -->
