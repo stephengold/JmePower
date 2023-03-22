@@ -15,6 +15,11 @@ tasks.register('checkstyle') {
     description 'Runs the checkstyle tool on all sourcecode.'
 }
 
+tasks.register('run') {
+    dependsOn ':JmePowerExamples:run'
+    description 'Runs the example.'
+}
+
 // publishing tasks:
 
 tasks.register('install') {
