@@ -12,12 +12,12 @@ tasks.register('checkstyle') {
     dependsOn ':JmePowerAssets:checkstyleMain', \
         ':JmePowerExamples:checkstyleMain', \
         ':JmePowerLibrary:checkstyleMain'
-    description 'Runs the checkstyle tool on all sourcecode.'
+    description 'Checks the style of all Java sourcecode.'
 }
 
 tasks.register('run') {
     dependsOn ':JmePowerExamples:run'
-    description 'Runs the example.'
+    description 'Runs the examples.'
 }
 
 // publishing tasks:
