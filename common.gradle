@@ -4,9 +4,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'java'
 
 ext {
-    group = 'com.github.stephengold'
     jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
-    websiteUrl = 'https://github.com/stephengold/JmePower'
 
     // module coordinates of external dependencies:
     heartCoordinates = 'com.github.stephengold:Heart:8.4.0' + jmeTarget

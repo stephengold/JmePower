@@ -9,6 +9,7 @@ plugins {
 }
 
 ext {
+    group = 'com.github.stephengold'
     artifact = 'JmePower'
     metadata = jmeTarget
 
@@ -20,6 +21,7 @@ ext {
     baseName = "${artifact}-${version}" // for POM and class JAR
 
     resourcesDir = 'src/main/resources/'
+    websiteUrl = 'https://github.com/stephengold/JmePower'
 }
 
 dependencies {
