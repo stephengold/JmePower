@@ -18,7 +18,7 @@ ext {
     } else {
         version = "${jmePowerVersion}+${metadata}"
     }
-    baseName = "${artifact}-${version}" // for POM and class JAR
+    baseName = "${artifact}-${version}" // for artifacts
 
     resourcesDir = 'src/main/resources/'
     websiteUrl = 'https://github.com/stephengold/JmePower'
