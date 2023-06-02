@@ -3,17 +3,6 @@
 apply plugin: 'checkstyle'
 apply plugin: 'java'
 
-ext {
-    jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
-
-    // module coordinates of external dependencies:
-    heartCoordinates = 'com.github.stephengold:Heart:8.6.0' + jmeTarget
-
-    // current versions of libraries:
-    jme3Version = '3.6.0-stable'
-    jmePowerVersion = '1.1.2-SNAPSHOT'
-}
-
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_8
 
