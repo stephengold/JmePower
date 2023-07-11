@@ -10,7 +10,7 @@ application {
     mainClass = 'jme3test.helloworld.HelloJmePower'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
     implementation 'org.jmonkeyengine:jme3-core:' + jme3Version
