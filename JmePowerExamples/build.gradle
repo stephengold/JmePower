@@ -23,5 +23,5 @@ dependencies {
     runtimeOnly 'org.jmonkeyengine:jme3-plugins:' + jme3Version
 
     //implementation 'com.github.stephengold:JmePower' + wesVersion // for published library
-    implementation project(':JmePowerLibrary') // for latest library build
+    implementation project(':JmePowerLibrary') // for local library build
 }
