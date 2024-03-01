@@ -9,7 +9,7 @@ It contains 3 sub-projects:
 2. JmePowerAssets: generate assets included in the library
 3. JmePowerExamples: sample applications using the library
 
-Complete source code (in Java) is provided under
+Complete source code (in [Java]) is provided under
 [a 3-clause BSD license][license].
 
 ## Licensing
@@ -129,6 +129,7 @@ A `SimpleApplication` might check for completion in `simpleUpdate()`:
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [jaime]: https://github.com/stephengold/JmePower/tree/master/JmePowerLibrary/src/main/resources/Models/Jaime "Jaime model"
+[java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
 [jme]: https://jmonkeyengine.org "jMonkeyEngine Project"
 [jmepower]: https://github.com/stephengold/JmePower "JmePower Project"
 [latest]: https://github.com/stephengold/JmePower/releases/latest "latest release"
