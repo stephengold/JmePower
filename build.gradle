@@ -1,4 +1,4 @@
-// Gradle build script for the JmePower project
+// Gradle script to build the JmePower project
 
 plugins {
     id 'base' // to add a "clean" task to the root project
@@ -31,7 +31,7 @@ tasks.register('run') {
     description 'Runs the examples.'
 }
 
-// publishing tasks:
+// Register publishing tasks:
 
 tasks.register('install') {
     dependsOn ':JmePowerLibrary:install'
