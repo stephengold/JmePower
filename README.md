@@ -3,7 +3,7 @@
 The [JmePower Project][jmepower] is about promoting
 [the jMonkeyEngine (JME) game engine][jme].
 
-It contains 3 sub-projects:
+It contains 3 subprojects:
 
 1. JmePowerLibrary: the JmePower startup library for jMonkeyEngine applications
 2. JmePowerAssets: generate assets included in the library
