@@ -27,8 +27,8 @@ ext {
 }
 
 dependencies {
-    api 'org.jmonkeyengine:jme3-core:' + jme3Version
-    api heartCoordinates
+    api(libs.jme3.core)
+    api(libs.heart)
 }
 
 processResources.dependsOn(':JmePowerAssets:poweredBy')

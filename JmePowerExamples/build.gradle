@@ -15,14 +15,14 @@ application {
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    implementation 'org.jmonkeyengine:jme3-core:' + jme3Version
-    runtimeOnly 'org.jmonkeyengine:jme3-desktop:' + jme3Version
-    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
+    implementation(libs.jme3.core)
+    runtimeOnly(libs.jme3.desktop)
+    runtimeOnly(libs.jme3.lwjgl3)
 
     // JmePowerExamples doesn't use jme3-jogg nor jme3-plugins
     //  -- they are included solely to avoid warnings from AssetConfig.
-    runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jme3Version
-    runtimeOnly 'org.jmonkeyengine:jme3-plugins:' + jme3Version
+    runtimeOnly(libs.jme3.jogg)
+    runtimeOnly(libs.jme3.plugins)
 
     //implementation 'com.github.stephengold:JmePower' + wesVersion // for published library
     implementation project(':JmePowerLibrary') // for local library build
