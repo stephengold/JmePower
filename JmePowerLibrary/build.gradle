@@ -53,6 +53,7 @@ jar {
         attributes 'Created-By': "${JavaVersion.current()} (${System.getProperty("java.vendor")})"
     }
 }
+java.withJavadocJar()
 javadocJar { archiveBaseName = project.ext.baseName }
 sourcesJar { archiveBaseName = project.ext.baseName }
 
@@ -89,7 +90,6 @@ tasks.register('pomAsc', Copy) {
 publishing {
     publications {
         maven(MavenPublication) {
-            artifact javadocJar
             artifact sourcesJar
             artifactId artifact
             from components.java

@@ -33,15 +33,6 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     //jvmArgs '-Xms1024m', '-Xmx1024m' // to enlarge the Java heap
 }
 
-// Register custom tasks for creating source/javadoc JARs:
-
-tasks.register('javadocJar', Jar) {
-    archiveClassifier = 'javadoc'
-    dependsOn 'javadoc'
-    description 'Creates a JAR of javadoc.'
-    from javadoc.destinationDir
-}
-
 tasks.register('sourcesJar', Jar) {
     archiveClassifier = 'sources'
     description 'Creates a JAR of sourcecode.'
