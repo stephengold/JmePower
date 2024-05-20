@@ -13,8 +13,8 @@ ext {
 }
 
 dependencies {
-    implementation heartCoordinates
-    implementation 'org.imgscalr:imgscalr-lib:4.2'
+    implementation(libs.heart)
+    implementation(libs.imgscalr)
 }
 
 tasks.register('textures') {
