@@ -15,6 +15,10 @@ subprojects {
     apply from: rootProject.file('common.gradle')
 }
 
+configurations.configureEach {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // to disable caching of snapshots
+}
+
 tasks.register('checkstyle') {
     dependsOn ':JmePowerAssets:checkstyleMain', \
         ':JmePowerExamples:checkstyleMain', \

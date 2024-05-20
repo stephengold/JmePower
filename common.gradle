@@ -33,10 +33,6 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     //jvmArgs '-Xms1024m', '-Xmx1024m' // to enlarge the Java heap
 }
 
-configurations.configureEach {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // to disable caching of snapshots
-}
-
 // Register custom tasks for creating source/javadoc JARs:
 
 tasks.register('javadocJar', Jar) {
