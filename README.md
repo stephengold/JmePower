@@ -79,13 +79,13 @@ resolve the compile-time dependencies.
 
 #### Gradle-built projects
 
-Add to the project’s "build.gradle" file:
+Add to the project’s "build.gradle" or "build.gradle.kts" file:
 
     repositories {
         mavenCentral()
     }
     dependencies {
-        implementation 'com.github.stephengold:JmePower:1.1.1'
+        implementation("com.github.stephengold:JmePower:1.1.1")
     }
 
 ### Instantiate and attach an AppState
