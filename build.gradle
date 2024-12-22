@@ -29,9 +29,9 @@ tasks.register('run') {
 
 tasks.register('install') {
     dependsOn ':JmePowerLibrary:install'
-    description 'Installs Maven artifacts to the local repository.'
+    description = 'Installs Maven artifacts to the local repository.'
 }
 tasks.register('release') {
     dependsOn ':JmePowerLibrary:release'
-    description 'Stages Maven artifacts to Sonatype OSSRH.'
+    description = 'Stages Maven artifacts to Sonatype OSSRH.'
 }
