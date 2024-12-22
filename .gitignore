@@ -10,6 +10,7 @@
 /.nb-gradle/
 
 # Ignore Gradle's build output directories:
+/build/
 /JmePowerAssets/build/
 /JmePowerExamples/build/
 /JmePowerLibrary/build/
