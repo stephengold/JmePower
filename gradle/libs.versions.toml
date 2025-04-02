@@ -3,12 +3,13 @@
 [versions]
 
 checkstyle = "9.3"
-jme = "3.8.0-alpha4"
+jme = "3.8.0-beta1"
 
 [libraries]
 
 heart = "com.github.stephengold:Heart:9.2.0"
 imgscalr = "org.imgscalr:imgscalr-lib:4.2"
+
 jme3-core = { module = "org.jmonkeyengine:jme3-core", version.ref = "jme" }
 jme3-desktop = { module = "org.jmonkeyengine:jme3-desktop", version.ref = "jme" }
 jme3-jogg = { module = "org.jmonkeyengine:jme3-jogg", version.ref = "jme" }
