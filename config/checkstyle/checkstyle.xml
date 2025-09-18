@@ -288,6 +288,17 @@
             <message key="name.invalidPattern" value="Type name ''{0}'' must match pattern ''{1}''."/>
         </module>
 
+        <!-- Regexp checks:                           -->
+        <!-- See https://checkstyle.org/checks/regexp -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="static (abstract|final|package|private|protected)|(package|private|protected) (abstract|final)"/>
+            <property name="message" value="Modifiers must appear in alphabetical order."/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="\{[ ]+\}"/>
+            <property name="message" value="Empty blocks must not contain spaces."/>
+        </module>
+
         <!-- Checks for size violations:             -->
         <!-- See https://checkstyle.org/checks/sizes -->
         <module name="MethodLength">
