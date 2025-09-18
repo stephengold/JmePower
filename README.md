@@ -22,6 +22,7 @@ The source code has [a BSD 3-Clause license][license].
 ## How to build JmePower from source
 
 1. Install a [Java Development Kit (JDK)][adoptium],
+   version 17 or higher,
    if you don't already have one.
 2. Point the `JAVA_HOME` environment variable to your JDK installation:
    (In other words, set it to the path of a directory/folder
