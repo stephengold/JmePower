@@ -37,9 +37,7 @@
     <module name="FileLength">
         <property name="max" value="600"/>
     </module>
-    <module name="LineLength">
-        <property name="fileExtensions" value="java"/>
-    </module>
+    <module name="LineLength"/>
 
     <!-- Checks for whitespace:                       -->
     <!-- See https://checkstyle.org/checks/whitespace -->
@@ -122,7 +120,7 @@
         <module name="IllegalInstantiation"/>
         <module name="IllegalThrows"/>
         <module name="IllegalToken">
-            <property name="tokens" value="LITERAL_NATIVE, POST_DEC, POST_INC, STATIC_IMPORT"/>
+            <property name="tokens" value="LITERAL_NATIVE, POST_DEC, POST_INC, STATIC_IMPORT, LABELED_STAT"/>
         </module>
         <module name="IllegalTokenText">
             <property name="format" value="\\u00(09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)"/>
@@ -240,7 +238,7 @@
             <message key="name.invalidPattern" value="Class type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="InterfaceTypeParameterName">
-            <property name="format" value="(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)"/>
+            <property name="format" value="^[A-Z]$"/>
             <message key="name.invalidPattern" value="Interface type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="LambdaParameterName">
@@ -261,7 +259,7 @@
             <message key="name.invalidPattern" value="Method name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MethodTypeParameterName">
-            <property name="format" value="(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)"/>
+            <property name="format" value="^$"/>
             <message key="name.invalidPattern" value="Method type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="PackageName">
@@ -273,15 +271,15 @@
             <message key="name.invalidPattern" value="Parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="PatternVariableName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]{0,19}$"/>
+            <property name="format" value="^$"/>
             <message key="name.invalidPattern" value="Pattern variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="RecordComponentName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]{0,19}$"/>
+            <property name="format" value="^$"/>
             <message key="name.invalidPattern" value="Record component name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="RecordTypeParameterName">
-            <property name="format" value="(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)"/>
+            <property name="format" value="^$"/>
             <message key="name.invalidPattern" value="Record type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="StaticVariableName"/>
