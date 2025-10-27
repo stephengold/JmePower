@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022, Stephen Gold
+ Copyright (c) 2020-2025 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -210,7 +210,6 @@ public class JmeLoadingState extends BaseAppState {
                 numAdditionalThreads, "number of additional threads");
 
         // Add all of the loadables to a queue.
-        int numLoadables = queue.size();
         int maxPreloaders = 2;
         int numPreloaders = Math.min(numLoadables, maxPreloaders);
         int numThreadsToCreate = numPreloaders + numAdditionalThreads;
