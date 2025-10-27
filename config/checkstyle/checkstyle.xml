@@ -101,7 +101,11 @@
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
+        <module name="MutableException"/>
         <module name="OneTopLevelClass"/>
+        <module name="ThrowsCount">
+            <property name="max" value="1"/>
+        </module>
 
         <!-- Checks for common coding problems:       -->
         <!-- See https://checkstyle.org/checks/coding -->
@@ -162,6 +166,9 @@
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocMethod">
             <property name="allowedAnnotations" value=""/>
+        </module>
+        <module name="JavadocParagraph">
+            <property name="allowNewlineParagraph" value="false"/>
         </module>
         <module name="JavadocStyle">
             <property name="checkFirstSentence" value="false"/>
