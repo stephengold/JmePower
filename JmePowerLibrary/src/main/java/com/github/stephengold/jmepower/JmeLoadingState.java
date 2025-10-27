@@ -460,6 +460,11 @@ public class JmeLoadingState extends BaseAppState {
         cinematic.setSpeed(1.2f);
     }
 
+    /**
+     * Construct a geometry for the floor that Jaime lands on.
+     *
+     * @return a new object without a parent
+     */
     private Geometry setupFloor() {
         AssetManager assetManager = application.getAssetManager();
 

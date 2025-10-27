@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022, Stephen Gold
+ Copyright (c) 2020-2025 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -51,6 +51,9 @@ final public class MakePoweredBy extends MakeSquareTexture {
     // *************************************************************************
     // constructors
 
+    /**
+     * Specify the number of pixels on each edge of the image map.
+     */
     private MakePoweredBy() {
         super(2048);
     }
@@ -63,35 +66,37 @@ final public class MakePoweredBy extends MakeSquareTexture {
      * @param arguments array of command-line arguments (not null)
      */
     public static void main(String[] arguments) {
-        /*
-         * Mute the chatty loggers found in some imported packages.
-         */
+
+        // Mute the chatty loggers found in some imported packages:
         Heart.setLoggingLevels(Level.WARNING);
-        /*
-         * Set the logging level for this class and also for writeImage().
-         */
+
+        // Set the logging level for this class and also for writeImage():
         //logger.setLevel(Level.INFO);
         //Logger.getLogger(Heart.class.getName()).setLevel(Level.INFO);
-        /*
-         * Instantiate the application.
-         */
+        // Instantiate the application:
         MakePoweredBy application = new MakePoweredBy();
-        /*
-         * Log the working directory.
-         */
+
+        // Log the working directory:
         String userDir = System.getProperty("user.dir");
         logger.log(Level.INFO, "working directory is {0}",
                 MyString.quote(userDir));
-        /*
-         * Generate a color image map.
-         */
+
+        // Generate a color image map:
         application.makePoweredBy();
     }
     // *************************************************************************
     // private methods
 
-    private void drawStar(Graphics2D graphics, int xIndex, int yIndex,
-            double outerRadius) {
+    /**
+     * Draw a 5-pointed star using the specified graphics context.
+     *
+     * @param graphics the graphics context (not null)
+     * @param xIndex the column index of the desired location
+     * @param yIndex the row index of the desired location
+     * @param outerRadius the desired radius of the star
+     */
+    private void drawStar(
+            Graphics2D graphics, int xIndex, int yIndex, double outerRadius) {
         int numPoints = 10;
         int[] xPoints = new int[numPoints];
         int[] yPoints = new int[numPoints];
@@ -121,9 +126,8 @@ final public class MakePoweredBy extends MakeSquareTexture {
      */
     private void makePoweredBy() {
         Graphics2D graphics = createOpaque(Color.LIGHT_GRAY);
-        /*
-         * Add 10 stars.
-         */
+
+        // Add 10 stars:
         for (int yIndex = 0; yIndex < 2; ++yIndex) {
             for (int xIndex = 0; xIndex < 5; ++xIndex) {
                 graphics.setColor(Color.BLACK);
@@ -132,9 +136,8 @@ final public class MakePoweredBy extends MakeSquareTexture {
                 drawStar(graphics, xIndex, yIndex, 0.08);
             }
         }
-        /*
-         * Add the lettering.
-         */
+
+        // Add the lettering:
         graphics.setColor(Color.DARK_GRAY);
         graphics.setFont(new Font("Serif", Font.ITALIC, 140));
         drawString("POWERED BY:", 0.5, 0.5);
