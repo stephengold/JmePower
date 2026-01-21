@@ -7,7 +7,7 @@ jme = "3.9.0-stable"
 
 [libraries]
 
-heart = "com.github.stephengold:Heart:9.2.0"
+heart = "com.github.stephengold:Heart:9.3.0"
 imgscalr = "org.imgscalr:imgscalr-lib:4.2"
 
 jme3-core = { module = "org.jmonkeyengine:jme3-core", version.ref = "jme" }
