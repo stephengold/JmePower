@@ -24,6 +24,6 @@ dependencies {
     runtimeOnly(libs.jme3.jogg)
     runtimeOnly(libs.jme3.plugins)
 
-    //implementation 'com.github.stephengold:JmePower' + wesVersion // for published library
+    //implementation 'com.github.stephengold:JmePower:' + providers.gradleProperty('jmePowerVersion').get() // for published library
     implementation project(':JmePowerLibrary') // for local library build
 }

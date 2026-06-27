@@ -13,13 +13,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'JmePower'
-    metadata = jmeTarget
-
-    if (metadata.equals('')) {
-        version = jmePowerVersion
-    } else {
-        version = "${jmePowerVersion}+${metadata}"
-    }
+    version = providers.gradleProperty('jmePowerVersion').get()
     baseName = "${artifact}-${version}" // for artifacts
 
     resourcesDir = 'src/main/resources/'

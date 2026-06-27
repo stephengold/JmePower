@@ -1,10 +1,5 @@
 // Gradle script to build the JmePower project
 
-ext {
-    jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
-    jmePowerVersion = '1.1.2-SNAPSHOT'
-}
-
 subprojects {
     apply from: rootProject.file('common.gradle')
 }
