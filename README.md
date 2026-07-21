@@ -127,7 +127,7 @@ A `SimpleApplication` might check for completion in `simpleUpdate()`:
     }
 
 
-[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
+[adoptium]: https://adoptium.net/temurin/releases/ "Adoptium Project"
 [fish]: https://fishshell.com/ "Fish command-line shell"
 [git]: https://git-scm.com "Git"
 [gradle]: https://gradle.org "Gradle Project"
