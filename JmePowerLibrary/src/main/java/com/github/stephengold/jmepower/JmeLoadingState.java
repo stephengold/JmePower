@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2025 Stephen Gold
+ Copyright (c) 2020-2026 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -264,7 +264,7 @@ public class JmeLoadingState extends BaseAppState {
         }
 
         if (shutter != null) {
-            shutter.removeFromParent(); // TODO application should do this
+            shutter.removeFromParent(); // TODO: application should do this
             this.shutter = null;
         }
 

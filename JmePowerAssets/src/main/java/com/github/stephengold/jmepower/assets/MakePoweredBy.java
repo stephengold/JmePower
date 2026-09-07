@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2025 Stephen Gold
+ Copyright (c) 2020-2026 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -71,8 +71,8 @@ final public class MakePoweredBy extends MakeSquareTexture {
         Heart.setLoggingLevels(Level.WARNING);
 
         // Set the logging level for this class and also for writeImage():
-        //logger.setLevel(Level.INFO);
-        //Logger.getLogger(Heart.class.getName()).setLevel(Level.INFO);
+        // logger.setLevel(Level.INFO);
+        // Logger.getLogger(Heart.class.getName()).setLevel(Level.INFO);
         // Instantiate the application:
         MakePoweredBy application = new MakePoweredBy();
 
