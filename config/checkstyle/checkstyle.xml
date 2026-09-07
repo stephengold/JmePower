@@ -171,9 +171,6 @@
         <module name="JavadocParagraph">
             <property name="allowNewlineParagraph" value="false"/>
         </module>
-        <module name="JavadocStyle">
-            <property name="checkFirstSentence" value="false"/>
-        </module>
         <module name="JavadocTagContinuationIndentation">
             <property name="offset" value="0"/>
         </module>
