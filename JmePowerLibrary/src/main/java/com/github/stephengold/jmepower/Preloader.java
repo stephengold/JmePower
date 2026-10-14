@@ -88,26 +88,29 @@ public class Preloader extends Thread {
      */
     @Override
     public void run() {
-        Loadable loadable;
-        while (true) {
-            loadable = loadables.poll();
-            if (loadable == null) {
-                break;
+        try {
+            Loadable loadable;
+            while (true) {
+                loadable = loadables.poll();
+                if (loadable == null) {
+                    break;
+                }
+
+                long startNanos = System.nanoTime();
+                loadable.load(assetManager);
+
+                if (logger.isLoggable(Level.INFO)) {
+                    String name = loadable.getClass().getSimpleName();
+                    long latencyNanos = System.nanoTime() - startNanos;
+                    float seconds = latencyNanos / 1e9f;
+                    String message
+                            = String.format("loaded %s in %.6f sec", name, seconds);
+                    logger.log(Level.INFO, message);
+                }
             }
 
-            long startNanos = System.nanoTime();
-            loadable.load(assetManager);
-
-            if (logger.isLoggable(Level.INFO)) {
-                String name = loadable.getClass().getSimpleName();
-                long latencyNanos = System.nanoTime() - startNanos;
-                float seconds = latencyNanos / 1e9f;
-                String message
-                        = String.format("loaded %s in %.6f sec", name, seconds);
-                logger.log(Level.INFO, message);
-            }
+        } finally {
+            completionLatch.countDown();
         }
-
-        completionLatch.countDown();
     }
 }
