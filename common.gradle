@@ -29,9 +29,10 @@ tasks.withType(JavaCompile).configureEach { // Java compile-time options:
     options.release = 8
 }
 
+Boolean assertions = providers.gradleProperty("assertions").get().equals("true")
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.main.runtimeClasspath
-    enableAssertions = true
+    enableAssertions = assertions
     jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
     //jvmArgs '-verbose:gc'
     //jvmArgs '-Xms1024m', '-Xmx1024m' // to enlarge the Java heap
