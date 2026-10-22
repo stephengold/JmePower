@@ -2,8 +2,9 @@
 *.dylib
 *.so
 
-# Ignore Gradle's project-specific cache directory:
+# Ignore Gradle's project-specific cache directories:
 /.gradle/
+/buildSrc/.gradle/
 
 # Ignore IDE-specific directories:
 /.idea/
@@ -11,6 +12,7 @@
 
 # Ignore Gradle's build output directories:
 /build/
+/buildSrc/build/
 /JmePowerAssets/build/
 /JmePowerExamples/build/
 /JmePowerLibrary/build/
