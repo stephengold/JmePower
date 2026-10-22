@@ -95,15 +95,24 @@ public class Preloader extends Thread {
                     break;
                 }
 
+                boolean success = false;
                 long startNanos = System.nanoTime();
-                loadable.load(assetManager);
+                try {
+                    loadable.load(assetManager);
+                    success = true;
+                } catch (Throwable exception) {
+                    System.out.flush();
+                    exception.printStackTrace(System.err);
+                    System.err.flush();
+                }
 
                 if (logger.isLoggable(Level.INFO)) {
                     String name = loadable.getClass().getSimpleName();
                     long latencyNanos = System.nanoTime() - startNanos;
                     float seconds = latencyNanos / 1e9f;
-                    String message = String.format(
-                            "loaded %s in %.6f sec", name, seconds);
+                    String message = String.format("%s %s in %.6f sec",
+                            success ? "loaded" : "failed to load",
+                            name, seconds);
                     logger.log(Level.INFO, message);
                 }
             }

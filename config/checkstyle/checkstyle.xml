@@ -129,7 +129,6 @@
         <module name="HiddenField">
             <property name="tokens" value="VARIABLE_DEF, PATTERN_VARIABLE_DEF, LAMBDA, RECORD_COMPONENT_DEF"/>
         </module>
-        <module name="IllegalCatch"/>
         <module name="IllegalInstantiation"/>
         <module name="IllegalThrows"/>
         <module name="IllegalToken">
