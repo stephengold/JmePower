@@ -1,6 +1,6 @@
 # Release log for the JmePower project
 
-## Version 1.1.2 released on TBD
+## Version 1.1.2 released on 22 October 2026
 
 + Bugfix: deadlock occurs after a `Loadable` throws an exception
 + Began terminating the application if any load fails with assertions enabled.
