@@ -31,6 +31,7 @@ import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jme3utilities.Heart;
 import jme3utilities.Loadable;
 
 /**
@@ -114,6 +115,9 @@ public class Preloader extends Thread {
                             success ? "loaded" : "failed to load",
                             name, seconds);
                     logger.log(Level.INFO, message);
+                }
+                if (!success && Heart.areAssertionsEnabled()) {
+                    System.exit(1);
                 }
             }
 
