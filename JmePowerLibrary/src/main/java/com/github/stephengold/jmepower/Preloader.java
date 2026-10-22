@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022, Stephen Gold
+ Copyright (c) 2020-2026 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -88,9 +88,8 @@ public class Preloader extends Thread {
      */
     @Override
     public void run() {
-        Loadable loadable;
         while (true) {
-            loadable = loadables.poll();
+            Loadable loadable = loadables.poll();
             if (loadable == null) {
                 break;
             }
