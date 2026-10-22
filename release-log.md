@@ -1,5 +1,14 @@
 # Release log for the JmePower project
 
+## Version 1.1.2 released on TBD
+
++ Bugfix: deadlock occurs after a `Loadable` throws an exception
++ Began terminating the application if any load fails with assertions enabled.
++ Depend on Heart v9.3.0 and JME v3.9.0-stable.
++ Added a developer ID and inception year to the POM.
++ Update the Gradle build tool to v9; JDK 17+ is now required to build.
++ Began publishing via the Central Publisher Portal instead of OSSRH.
+
 ## Version 1.1.1 released on 21 March 2023
 
 + Depend on Heart v8.3.2 and JME v3.6.0-stable.
